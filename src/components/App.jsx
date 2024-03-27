@@ -1,9 +1,11 @@
-function App() {
+import { GlobalStyles } from "./GlobalStyles/GlobalStyles";
+import { Header } from "./Header/Header";
+
+export const App = () => {
   return (
     <>
-      <h1>hello</h1>
+      <GlobalStyles />
+      <Header />
     </>
   );
-}
-
-export default App;
+};
