@@ -9,4 +9,4 @@ Currently, two official plugins are available:
 
 # Babysitters
 
-git init
+git initi
