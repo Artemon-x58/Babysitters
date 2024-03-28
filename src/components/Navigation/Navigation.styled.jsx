@@ -1,19 +1,18 @@
 import styled from "styled-components";
+import { Container } from "../Container/Container";
+
+export const NavContainer = styled(Container)`
+  padding: 0 96px;
+`;
 
 export const NavStyled = styled.nav`
-  position: relative;
+  position: absolute;
+  right: 96px;
+  left: 96px;
   display: flex;
   align-items: center;
-
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: -20px;
-
-    height: 1px;
-    width: 100%;
-    background-color: rgba(251, 251, 251, 0.4);
-  }
+  z-index: 10;
+  padding-top: 20px;
 `;
 
 export const Logo = styled.a`

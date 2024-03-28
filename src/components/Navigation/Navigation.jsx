@@ -9,11 +9,11 @@ import {
   NavListPagesLink,
   NavStyled,
 } from "../Navigation/Navigation.styled";
-import { Container } from "../Container/Container";
+import { NavContainer } from "../Navigation/Navigation.styled";
 
 export const Navigation = () => {
   return (
-    <Container>
+    <NavContainer>
       <NavStyled>
         <Logo>Nanny.Services</Logo>
 
@@ -35,6 +35,6 @@ export const Navigation = () => {
           </NavListBtnsItem>
         </NavListBtns>
       </NavStyled>
-    </Container>
+    </NavContainer>
   );
 };

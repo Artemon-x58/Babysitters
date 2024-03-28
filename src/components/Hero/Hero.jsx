@@ -1,5 +1,5 @@
-import { Container } from "../Container/Container";
 import {
+  ContainerHero,
   HeroBtn,
   HeroBtnSvg,
   HeroExperienceNumber,
@@ -8,30 +8,39 @@ import {
   HeroExperienceText,
   HeroExperienceWrapper,
   HeroSubtitle,
+  HeroTextWrapper,
   HeroTitle,
+  HeroWrapper,
 } from "./Hero.styled";
 import Icons from "../../img/icons.svg";
 
 export const Hero = () => {
   return (
-    <Container>
-      <HeroTitle>Make Life Easier for the Family:</HeroTitle>
-      <HeroSubtitle>Find Babysitters Online for All Occasions</HeroSubtitle>
-      <HeroBtn>
-        Get started
-        <HeroBtnSvg>
-          <use href={`${Icons}#icon-arrow`} />
-        </HeroBtnSvg>
-      </HeroBtn>
-      <HeroExperienceWrapper>
-        <HeroExperienceSvgWrapper>
-          <HeroExperienceSvg>
-            <use href={`${Icons}#icon-check`} />
-          </HeroExperienceSvg>
-        </HeroExperienceSvgWrapper>
-        <HeroExperienceText>Experienced nannies</HeroExperienceText>
-        <HeroExperienceNumber>15,000</HeroExperienceNumber>
-      </HeroExperienceWrapper>
-    </Container>
+    <ContainerHero>
+      <HeroWrapper>
+        <HeroTextWrapper>
+          <HeroTitle>Make Life Easier for the Family:</HeroTitle>
+          <HeroSubtitle>Find Babysitters Online for All Occasions</HeroSubtitle>
+          <HeroBtn>
+            Get started
+            <HeroBtnSvg>
+              <use href={`${Icons}#icon-arrow`} />
+            </HeroBtnSvg>
+          </HeroBtn>
+        </HeroTextWrapper>
+
+        <HeroExperienceWrapper>
+          <HeroExperienceSvgWrapper>
+            <HeroExperienceSvg>
+              <use href={`${Icons}#icon-check`} />
+            </HeroExperienceSvg>
+          </HeroExperienceSvgWrapper>
+          <div>
+            <HeroExperienceText>Experienced nannies</HeroExperienceText>
+            <HeroExperienceNumber>15,000</HeroExperienceNumber>
+          </div>
+        </HeroExperienceWrapper>
+      </HeroWrapper>
+    </ContainerHero>
   );
 };
