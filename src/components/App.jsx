@@ -1,11 +1,13 @@
 import { GlobalStyles } from "./GlobalStyles/GlobalStyles";
-import { Header } from "./Header/Header";
+import { AppBar } from "../components/AppBar/AppBar";
+import { Hero } from "./Hero/Hero";
 
 export const App = () => {
   return (
     <>
       <GlobalStyles />
-      <Header />
+      <AppBar />
+      <Hero />
     </>
   );
 };

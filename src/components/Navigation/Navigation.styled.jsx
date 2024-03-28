@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const HeaderStyled = styled.header`
+export const NavStyled = styled.nav`
   position: relative;
   display: flex;
   align-items: center;
@@ -24,15 +24,13 @@ export const Logo = styled.a`
   margin-right: auto;
 `;
 
-export const NavStyled = styled.nav``;
-
-export const HeaderListPages = styled.ul`
+export const NavListPages = styled.ul`
   display: flex;
   gap: 40px;
   margin-right: 92px;
 `;
 
-export const HeaderListPagesItem = styled.li`
+export const NavListPagesItem = styled.li`
   font-weight: 400;
   font-size: 16px;
   line-height: 125%;
@@ -40,16 +38,16 @@ export const HeaderListPagesItem = styled.li`
   color: #fbfbfb;
 `;
 
-export const HeaderListPagesLink = styled.a``;
+export const NavListPagesLink = styled.a``;
 
-export const HeaderListBtns = styled.ul`
+export const NavListBtns = styled.ul`
   display: flex;
   gap: 8px;
 `;
 
-export const HeaderListBtnsItem = styled.li``;
+export const NavListBtnsItem = styled.li``;
 
-export const HeaderBtnLogIn = styled.button`
+export const NavBtnLogIn = styled.button`
   border: 1px solid rgba(251, 251, 251, 0.4);
   border-radius: 30px;
   padding: 14px 39px;
@@ -63,7 +61,7 @@ export const HeaderBtnLogIn = styled.button`
   color: #fbfbfb;
 `;
 
-export const HeaderBtnReg = styled.button`
+export const NavBtnReg = styled.button`
   border-radius: 30px;
   padding: 14px 40px;
   min-width: 168px;
