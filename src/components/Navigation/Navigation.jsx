@@ -12,8 +12,7 @@ import {
   NavStyled,
 } from "../Navigation/Navigation.styled";
 import { Modal } from "@mui/material";
-import { LogInForm } from "../LogInForm/LogInForm";
-import { RegistrationForm } from "../RegistrationForm/RegistrationForm";
+import { FormComponent } from "../FormComponent/FormComponent";
 
 export const Navigation = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -25,7 +24,7 @@ export const Navigation = () => {
   };
   const handleOpenModalReg = () => {
     setIsOpenModal(true);
-    setIsLogInOrReg("reg");
+    setIsLogInOrReg("registration");
   };
   const handleCloseModal = () => {
     setIsOpenModal(false);
@@ -59,11 +58,10 @@ export const Navigation = () => {
       </NavContainer>
       <Modal open={isOpenModal} onClose={handleCloseModal}>
         <div>
-          {isLogInOrReg === "logIn" ? (
-            <LogInForm onClose={handleCloseModal} />
-          ) : (
-            <RegistrationForm />
-          )}
+          <FormComponent
+            isLogInOrReg={isLogInOrReg}
+            onClose={handleCloseModal}
+          />
         </div>
       </Modal>
     </>

@@ -1,7 +1,7 @@
 import { Field, Form } from "formik";
 import styled from "styled-components";
 
-export const LogInFormWrapper = styled.div`
+export const FormWrapper = styled.div`
   padding: 64px;
   position: absolute;
   top: 50%;
@@ -14,7 +14,7 @@ export const LogInFormWrapper = styled.div`
 
 export const FormStyled = styled(Form)``;
 
-export const FormLogInSvgCross = styled.svg`
+export const FormSvgCross = styled.svg`
   position: absolute;
   top: 20px;
   right: 20px;
@@ -23,7 +23,7 @@ export const FormLogInSvgCross = styled.svg`
   stroke: #11101c;
 `;
 
-export const LogInFormTitle = styled.h2`
+export const FormTitle = styled.h2`
   margin-bottom: 20px;
 
   font-size: 40px;
@@ -32,7 +32,7 @@ export const LogInFormTitle = styled.h2`
   color: #11101c;
 `;
 
-export const LogInFormSubtitle = styled.p`
+export const FormSubtitle = styled.p`
   margin-bottom: 40px;
 
   font-weight: 400;
@@ -41,7 +41,7 @@ export const LogInFormSubtitle = styled.p`
   color: rgba(17, 16, 28, 0.5);
 `;
 
-export const LogInFormWrapperInputs = styled.div`
+export const FormWrapperInputs = styled.div`
   display: flex;
   flex-direction: column;
   gap: 18px;
@@ -49,7 +49,7 @@ export const LogInFormWrapperInputs = styled.div`
   margin-bottom: 40px;
 `;
 
-export const LogInFormInput = styled(Field)`
+export const FormInput = styled(Field)`
   padding: 16px 18px;
   border: 1px solid rgba(17, 16, 28, 0.1);
   border-radius: 12px;
@@ -60,9 +60,9 @@ export const LogInFormInput = styled(Field)`
   color: #11101c;
 `;
 
-export const LogInFormBtn = styled.button`
+export const FormBtn = styled.button`
   border-radius: 30px;
-  padding: 16px 196px;
+  padding: 16px 190px;
   width: 100%;
   height: 52px;
   border-radius: 30px;
