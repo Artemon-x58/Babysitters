@@ -1,7 +1,9 @@
 import { GlobalStyles } from "./GlobalStyles/GlobalStyles";
 import { Route, Routes } from "react-router-dom";
 import { Layout } from "./Layout/Layout";
-import { HomePage } from "./pages/home";
+
+import { Catalog } from "../pages/catalog";
+import { HomePage } from "../pages/home";
 
 export const App = () => {
   return (
@@ -10,7 +12,7 @@ export const App = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
-          <Route path="/catalog" />
+          <Route path="/catalog" element={<Catalog />} />
         </Route>
       </Routes>
     </>
