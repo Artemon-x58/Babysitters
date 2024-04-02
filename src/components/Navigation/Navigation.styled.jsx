@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Container } from "../Container/Container";
+import { NavLink } from "react-router-dom";
 
 export const NavContainer = styled(Container)`
   padding: 0 96px;
@@ -15,7 +16,7 @@ export const NavStyled = styled.nav`
   padding-top: 20px;
 `;
 
-export const Logo = styled.a`
+export const Logo = styled(NavLink)`
   font-size: 24px;
   line-height: 117%;
   letter-spacing: -0.02em;
@@ -37,7 +38,7 @@ export const NavListPagesItem = styled.li`
   color: #fbfbfb;
 `;
 
-export const NavListPagesLink = styled.a``;
+export const NavListPagesLink = styled(NavLink)``;
 
 export const NavListBtns = styled.ul`
   display: flex;

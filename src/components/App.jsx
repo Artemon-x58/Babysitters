@@ -1,13 +1,18 @@
 import { GlobalStyles } from "./GlobalStyles/GlobalStyles";
-import { AppBar } from "../components/AppBar/AppBar";
-import { Hero } from "./Hero/Hero";
+import { Route, Routes } from "react-router-dom";
+import { Layout } from "./Layout/Layout";
+import { HomePage } from "./pages/home";
 
 export const App = () => {
   return (
     <>
       <GlobalStyles />
-      <AppBar />
-      <Hero />
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route path="/catalog" />
+        </Route>
+      </Routes>
     </>
   );
 };

@@ -35,14 +35,17 @@ export const Navigation = () => {
     <>
       <NavContainer>
         <NavStyled>
-          <Logo>Nanny.Services</Logo>
+          <Logo to="/">Nanny.Services</Logo>
 
           <NavListPages>
             <NavListPagesItem>
-              <NavListPagesLink>Home</NavListPagesLink>
+              <NavListPagesLink to="/">Home</NavListPagesLink>
             </NavListPagesItem>
             <NavListPagesItem>
-              <NavListPagesLink>Nannies</NavListPagesLink>
+              <NavListPagesLink to="/catalog">Nannies</NavListPagesLink>
+            </NavListPagesItem>
+            <NavListPagesItem>
+              <NavListPagesLink to="/favorities">Favorities</NavListPagesLink>
             </NavListPagesItem>
           </NavListPages>
 

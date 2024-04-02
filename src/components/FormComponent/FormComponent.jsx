@@ -1,5 +1,4 @@
 import { Formik } from "formik";
-import * as Yup from "yup";
 import {
   FormBtn,
   FormInput,
@@ -12,6 +11,7 @@ import {
 } from "./FormComponent.styled";
 import Icons from "../../img/icons.svg";
 import PropTypes from "prop-types";
+import { validationSchema } from "./validationSchema";
 
 export const FormComponent = ({ onClose, isLogInOrReg }) => {
   return (
@@ -29,23 +29,7 @@ export const FormComponent = ({ onClose, isLogInOrReg }) => {
       </FormSubtitle>
       <Formik
         initialValues={{ name: "", email: "", password: "" }}
-        validationSchema={Yup.object({
-          name: Yup.string()
-            .required("Name is required")
-            .matches(/^[a-zA-Z]+$/, "Name must contain only Latin characters"),
-          email: Yup.string()
-            .required("Email is required")
-            .matches(
-              /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/,
-              "Invalid email address"
-            ),
-          password: Yup.string()
-            .required("Password is required")
-            .matches(
-              /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-              "Password must contain at least 8 characters, including one letter and one number"
-            ),
-        })}
+        validationSchema={validationSchema}
       >
         <FormStyled>
           <FormWrapperInputs>
