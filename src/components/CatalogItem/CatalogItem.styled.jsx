@@ -12,17 +12,30 @@ export const CatalogItemStyled = styled.li`
 export const CatalogItemMainWrapper = styled.div``;
 
 export const CatalogItemImgWrapper = styled.div`
+  position: relative;
   min-width: 92px;
   height: 92px;
   padding: 12px;
   border: 2px solid rgba(240, 63, 59, 0.2);
   border-radius: 30px;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 9px;
+    right: 14px;
+    width: 9px;
+    height: 9px;
+    border-radius: 100%;
+    background-color: #38cd3e;
+    border: 2.5px solid #fbfbfb;
+  }
 `;
 
 export const CatalogItemImg = styled.img`
   border-radius: 15px;
-  width: 96px;
-  height: 96px;
+  width: 100%;
+  height: 100%;
 `;
 
 export const CatalogItemProffesionWrapper = styled.div`
@@ -39,7 +52,7 @@ export const CatalogItemProffesion = styled.p`
 
 export const CatalogItemPropertiesWrapper = styled.div`
   display: flex;
-  gap: 32px;
+  align-items: center;
   margin-left: auto;
 `;
 
@@ -51,9 +64,19 @@ export const CatalogItemLocationSvg = styled.svg`
   fill: transparent;
 `;
 export const CatalogItemPropertiesText = styled.p`
+  display: flex;
+  align-items: center;
+
   font-size: 16px;
   line-height: 150%;
   color: #11101c;
+`;
+
+export const CatalogItemPropertiesBetweenSpan = styled.span`
+  margin-left: 16px;
+  margin-right: 16px;
+
+  color: rgba(17, 16, 28, 0.2);
 `;
 
 export const CatalogItemPriceSpan = styled.span`

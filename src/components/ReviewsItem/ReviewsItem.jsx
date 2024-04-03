@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import {
   ReviewsItemInitials,
   ReviewsItemInitialsWrapper,
@@ -34,4 +35,12 @@ export const ReviewsItem = ({ review }) => {
       <ReviewsItemText>{review.comment}</ReviewsItemText>
     </ReviewsItemStyled>
   );
+};
+
+ReviewsItem.propTypes = {
+  review: PropTypes.shape({
+    reviewer: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    comment: PropTypes.string.isRequired,
+  }).isRequired,
 };

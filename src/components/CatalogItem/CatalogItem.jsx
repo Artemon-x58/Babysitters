@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { CatalogItemInfo } from "../CatalogItemInfo/CatalogItemInfo";
 import {
   CatalogItemBtnHeart,
@@ -17,6 +18,7 @@ import {
   CatalogItemRatingSvg,
   CatalogItemStyled,
   CatalogItemSubtitle,
+  CatalogItemPropertiesBetweenSpan,
 } from "./CatalogItem.styled";
 import Icons from "../../img/icons.svg";
 import moment from "moment";
@@ -28,10 +30,25 @@ export const CatalogItem = ({ babysitter }) => {
 
   const handleReadMore = () => setIsReadMore(true);
 
+  const {
+    name,
+    avatar_url,
+    location,
+    rating,
+    price_per_hour,
+    birthday,
+    experience,
+    kids_age,
+    characters,
+    education,
+    about,
+    reviews,
+  } = babysitter;
+
   return (
-    <CatalogItemStyled id={babysitter.birthday}>
+    <CatalogItemStyled id={birthday}>
       <CatalogItemImgWrapper>
-        <CatalogItemImg src={babysitter.avatar_url} />
+        <CatalogItemImg src={avatar_url} />
       </CatalogItemImgWrapper>
       <CatalogItemMainWrapper>
         <CatalogItemProffesionWrapper>
@@ -41,19 +58,23 @@ export const CatalogItem = ({ babysitter }) => {
               <CatalogItemLocationSvg>
                 <use href={`${Icons}#icon-location`} />
               </CatalogItemLocationSvg>
-              {babysitter.location}
+              {location}
             </CatalogItemPropertiesText>
+            <CatalogItemPropertiesBetweenSpan>
+              |
+            </CatalogItemPropertiesBetweenSpan>
             <CatalogItemPropertiesText>
               <CatalogItemRatingSvg>
                 <use href={`${Icons}#icon-star`} />
               </CatalogItemRatingSvg>
-              Rating: {babysitter.rating}
+              Rating: {rating}
             </CatalogItemPropertiesText>
+            <CatalogItemPropertiesBetweenSpan>
+              |
+            </CatalogItemPropertiesBetweenSpan>
             <CatalogItemPropertiesText>
-              Price/1hour:{" "}
-              <CatalogItemPriceSpan>
-                {babysitter.price_per_hour}$
-              </CatalogItemPriceSpan>
+              Price / 1hour:
+              <CatalogItemPriceSpan>{price_per_hour}$</CatalogItemPriceSpan>
             </CatalogItemPropertiesText>
           </CatalogItemPropertiesWrapper>
           <CatalogItemBtnHeart>
@@ -63,28 +84,28 @@ export const CatalogItem = ({ babysitter }) => {
           </CatalogItemBtnHeart>
         </CatalogItemProffesionWrapper>
 
-        <CatalogItemName>{babysitter.name}</CatalogItemName>
+        <CatalogItemName>{name}</CatalogItemName>
         <CatalogItemListInfo>
           <CatalogItemInfo
             label="Age"
-            value={moment().diff(moment(babysitter.birthday), "years")}
+            value={moment().diff(moment(birthday), "years")}
           />
-          <CatalogItemInfo label="Experience" value={babysitter.experience} />
-          <CatalogItemInfo label="Kids Age" value={babysitter.kids_age} />
+          <CatalogItemInfo label="Experience" value={experience} />
+          <CatalogItemInfo label="Kids Age" value={kids_age} />
           <CatalogItemInfo
             label="Characters"
-            value={babysitter.characters
+            value={characters
               .map(
                 (character) =>
                   character.charAt(0).toUpperCase() + character.slice(1)
               )
               .join(", ")}
           />
-          <CatalogItemInfo label="Education" value={babysitter.education} />
+          <CatalogItemInfo label="Education" value={education} />
         </CatalogItemListInfo>
-        <CatalogItemSubtitle>{babysitter.about}</CatalogItemSubtitle>
+        <CatalogItemSubtitle>{about}</CatalogItemSubtitle>
         {isReadMore ? (
-          <ReviewsList reviews={babysitter.reviews} />
+          <ReviewsList reviews={reviews} />
         ) : (
           <CatalogItemButton type="button" onClick={() => handleReadMore()}>
             Read more
@@ -93,4 +114,23 @@ export const CatalogItem = ({ babysitter }) => {
       </CatalogItemMainWrapper>
     </CatalogItemStyled>
   );
+};
+
+CatalogItem.propTypes = {
+  babysitter: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    avatar_url: PropTypes.string.isRequired,
+    location: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    price_per_hour: PropTypes.number.isRequired,
+    birthday: PropTypes.string.isRequired,
+    experience: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+      .isRequired,
+    kids_age: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+      .isRequired,
+    characters: PropTypes.arrayOf(PropTypes.string).isRequired,
+    education: PropTypes.string.isRequired,
+    about: PropTypes.string.isRequired,
+    reviews: PropTypes.array.isRequired,
+  }).isRequired,
 };

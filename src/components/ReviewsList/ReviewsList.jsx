@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { ReviewsItem } from "../ReviewsItem/ReviewsItem";
 import { ReviewsListBtn, ReviewsListStyled } from "./ReviewsList.styled";
 
@@ -10,4 +11,14 @@ export const ReviewsList = ({ reviews }) => {
       <ReviewsListBtn type="button">Make an appointment</ReviewsListBtn>
     </ReviewsListStyled>
   );
+};
+
+ReviewsList.propTypes = {
+  reviews: PropTypes.arrayOf(
+    PropTypes.shape({
+      reviewer: PropTypes.string.isRequired,
+      rating: PropTypes.number.isRequired,
+      comment: PropTypes.string.isRequired,
+    }).isRequired
+  ).isRequired,
 };
