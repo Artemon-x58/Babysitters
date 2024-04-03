@@ -20,8 +20,14 @@ import {
 } from "./CatalogItem.styled";
 import Icons from "../../img/icons.svg";
 import moment from "moment";
+import { ReviewsList } from "../ReviewsList/ReviewsList";
+import { useState } from "react";
 
 export const CatalogItem = ({ babysitter }) => {
+  const [isReadMore, setIsReadMore] = useState(false);
+
+  const handleReadMore = () => setIsReadMore(true);
+
   return (
     <CatalogItemStyled id={babysitter.birthday}>
       <CatalogItemImgWrapper>
@@ -77,7 +83,13 @@ export const CatalogItem = ({ babysitter }) => {
           <CatalogItemInfo label="Education" value={babysitter.education} />
         </CatalogItemListInfo>
         <CatalogItemSubtitle>{babysitter.about}</CatalogItemSubtitle>
-        <CatalogItemButton type="button">Read more</CatalogItemButton>
+        {isReadMore ? (
+          <ReviewsList reviews={babysitter.reviews} />
+        ) : (
+          <CatalogItemButton type="button" onClick={() => handleReadMore()}>
+            Read more
+          </CatalogItemButton>
+        )}
       </CatalogItemMainWrapper>
     </CatalogItemStyled>
   );

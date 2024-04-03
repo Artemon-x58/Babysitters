@@ -1,5 +1,5 @@
 import { GlobalStyles } from "./GlobalStyles/GlobalStyles";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { Layout } from "./Layout/Layout";
 
 import { Catalog } from "../pages/catalog";
@@ -14,6 +14,7 @@ export const App = () => {
           <Route index element={<HomePage />} />
           <Route path="/catalog" element={<Catalog />} />
         </Route>
+        <Route path="*" element={<Navigate to={"/"} />} />
       </Routes>
     </>
   );
