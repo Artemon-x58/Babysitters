@@ -10,7 +10,7 @@ export const GlobalStyles = createGlobalStyle`
     font-weight: 500;
     margin: 0;
     padding: 0;
-  
+    background:#f3f3f3;
     
     
   }
