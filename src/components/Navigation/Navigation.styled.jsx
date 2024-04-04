@@ -12,6 +12,7 @@ export const NavStyled = styled.nav`
     $currentPath === "/" ? "absolute" : "unset"};
   right: 96px;
   left: 96px;
+  margin-bottom: 64px;
   display: flex;
   align-items: center;
   z-index: 10;
