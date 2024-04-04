@@ -12,13 +12,17 @@ const options = [
 ];
 
 const customStyles = {
-  control: (provided) => ({
+  control: (provided, { isFocused }) => ({
     ...provided,
-    backgroundColor: " #f03f3b",
-    width: "226px",
     marginBottom: "32px",
-    borderRadius: "14px",
     padding: "14px 18px 14px 18px",
+    width: "226px",
+
+    border: isFocused && "none",
+    borderRadius: "14px",
+    backgroundColor: " #f03f3b",
+    boxShadow: isFocused && "none",
+
     fontSize: "18px",
     lineHeight: "111%",
     color: "#fbfbfb",
@@ -26,6 +30,11 @@ const customStyles = {
   menu: (provided) => ({
     ...provided,
     width: "226px",
+
+    borderRadius: "14px",
+    background: "#fff",
+    boxShadow: "0 20px 69px 0 rgba(0, 0, 0, 0.07)",
+
     fontWeight: "400",
     fontSize: "18px",
     lineHeight: "111%",
@@ -43,6 +52,10 @@ const customStyles = {
   indicatorSeparator: (provided) => ({
     ...provided,
     width: "0px",
+  }),
+  dropdownIndicator: (provided) => ({
+    ...provided,
+    color: "#fbfbfb",
   }),
 };
 
