@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Container } from "../Container/Container";
 import ImageHero from "../../img/hero-image.png";
+import { Link } from "react-router-dom";
 
 export const ContainerHero = styled(Container)`
   position: relative;
@@ -55,12 +56,13 @@ export const HeroSubtitle = styled.p`
   color: #fbfbfb;
 `;
 
-export const HeroBtn = styled.button`
+export const HeroBtn = styled(Link)`
+  display: block;
   border: 1px solid rgba(251, 251, 251, 0.4);
   border-radius: 30px;
   padding: 18px 50px;
-  min-width: 230px;
-  height: 60px;
+  width: 135px;
+  height: 24px;
   background: transparent;
 
   font-size: 20px;

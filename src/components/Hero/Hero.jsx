@@ -21,7 +21,7 @@ export const Hero = () => {
         <HeroTextWrapper>
           <HeroTitle>Make Life Easier for the Family:</HeroTitle>
           <HeroSubtitle>Find Babysitters Online for All Occasions</HeroSubtitle>
-          <HeroBtn>
+          <HeroBtn type="button" to="/catalog">
             Get started
             <HeroBtnSvg>
               <use href={`${Icons}#icon-arrow`} />

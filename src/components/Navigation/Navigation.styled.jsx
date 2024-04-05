@@ -36,15 +36,30 @@ export const NavListPages = styled.ul`
   margin-right: 92px;
 `;
 
-export const NavListPagesItem = styled.li`
+export const NavListPagesItem = styled.li``;
+
+export const NavListPagesLink = styled(NavLink)`
+  position: relative;
   font-weight: 400;
   font-size: 16px;
   line-height: 125%;
   letter-spacing: -0.01em;
   color: #fbfbfb;
-`;
 
-export const NavListPagesLink = styled(NavLink)``;
+  &.active {
+    &::after {
+      content: "";
+      position: absolute;
+      right: calc(50% - 4px);
+
+      bottom: -14px;
+      width: 8px;
+      height: 8px;
+      border-radius: 180px;
+      background-color: #fff;
+    }
+  }
+`;
 
 export const NavListBtns = styled.ul`
   display: flex;
