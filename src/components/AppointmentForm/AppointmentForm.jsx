@@ -1,4 +1,6 @@
 import PropTypes from "prop-types";
+import "react-datetime/css/react-datetime.css";
+import Datetime from "react-datetime";
 import {
   AppointmentFormBtn,
   AppointmentFormImg,
@@ -19,6 +21,10 @@ import {
 } from "../FormComponent/FormComponent.styled";
 
 export const AppointmentForm = ({ avatar, name, onClose }) => {
+  let inputProps = {
+    placeholder: "00:00",
+  };
+
   return (
     <AppointmentFormWrapper>
       <FormSvgCross onClick={onClose}>
@@ -51,6 +57,12 @@ export const AppointmentForm = ({ avatar, name, onClose }) => {
         }}
       >
         <FormStyled>
+          <Datetime
+            inputProps={inputProps}
+            dateFormat={false}
+            timeFormat="hh-mm"
+            timeConstraints={{ minutes: { step: 30 } }}
+          />
           <FormInput id="address" name="address" placeholder="Address" />
           <FormInput id="number" name="number" placeholder="+380" />
           <FormInput id="age" name="age" placeholder="Child's age" />
