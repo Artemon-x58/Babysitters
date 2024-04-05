@@ -105,7 +105,7 @@ export const CatalogItem = ({ babysitter }) => {
         </CatalogItemListInfo>
         <CatalogItemSubtitle>{about}</CatalogItemSubtitle>
         {isReadMore ? (
-          <ReviewsList reviews={reviews} />
+          <ReviewsList reviews={reviews} avatar={avatar_url} name={name} />
         ) : (
           <CatalogItemButton type="button" onClick={() => handleReadMore()}>
             Read more

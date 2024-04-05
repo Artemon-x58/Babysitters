@@ -58,6 +58,13 @@ export const FormInput = styled(Field)`
   font-size: 16px;
   line-height: 125%;
   color: #11101c;
+
+  &::placeholder {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 125%;
+    color: #11101c;
+  }
 `;
 
 export const FormBtn = styled.button`
