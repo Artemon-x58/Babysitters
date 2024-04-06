@@ -31,8 +31,8 @@ export const CatalogList = () => {
         {listBabysitters.map((babysitter, index) => (
           <CatalogItem key={index} babysitter={babysitter} />
         ))}
-        <CatalogListBtn onClick={handleNextPage}>Load more</CatalogListBtn>
       </CatalogListStyled>
+      <CatalogListBtn onClick={handleNextPage}>Load more</CatalogListBtn>
     </Container>
   );
 };

@@ -1,7 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase, query, ref, limitToFirst, get } from "firebase/database";
 
-// Initialize Firebase app outside the function to avoid unnecessary re-initialization
 const firebaseConfig = {
   authDomain: "babysitters-b414b.firebaseapp.com",
   databaseURL:
