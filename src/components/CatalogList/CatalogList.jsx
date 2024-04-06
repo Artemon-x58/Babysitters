@@ -1,4 +1,4 @@
-import { CatalogListStyled } from "./CatalogList.styled";
+import { CatalogListBtn, CatalogListStyled } from "./CatalogList.styled";
 import { CatalogItem } from "../CatalogItem/CatalogItem";
 import { Container } from "../Container/Container";
 import { SelectComponent } from "../Select/SelectComponent";
@@ -11,7 +11,7 @@ export const CatalogList = () => {
   const itemsPerPage = 3;
 
   useEffect(() => {
-    getBabysittersListDB()
+    getBabysittersListDB(currentPage, itemsPerPage)
       .then((data) => {
         setListBabysitters(data);
       })
@@ -21,7 +21,7 @@ export const CatalogList = () => {
   }, [currentPage]);
 
   const handleNextPage = () => {
-    setCurrentPage((prevPage) => prevPage + 1); // Увеличение текущей страницы
+    setCurrentPage((prevPage) => prevPage + 1);
   };
 
   return (
@@ -31,7 +31,7 @@ export const CatalogList = () => {
         {listBabysitters.map((babysitter, index) => (
           <CatalogItem key={index} babysitter={babysitter} />
         ))}
-        <button onClick={handleNextPage}>Следующая страница</button>
+        <CatalogListBtn onClick={handleNextPage}>Load more</CatalogListBtn>
       </CatalogListStyled>
     </Container>
   );

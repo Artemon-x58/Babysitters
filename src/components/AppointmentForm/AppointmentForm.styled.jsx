@@ -56,9 +56,15 @@ export const AppointmentFormBtn = styled.button`
   height: 52px;
   background: #f03f3b;
   border: none;
+  transition: color 250ms linear, background-color 250ms linear;
 
   font-size: 16px;
   line-height: 125%;
   letter-spacing: -0.01em;
   color: #fbfbfb;
+
+  &:hover {
+    background-color: #fbfbfb;
+    color: #f03f3b;
+  }
 `;
