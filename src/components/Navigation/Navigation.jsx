@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import {
   Logo,
   NavBtnLogIn,
+  NavBtnLogOut,
   NavBtnReg,
   NavContainer,
   NavListBtns,
@@ -10,16 +11,24 @@ import {
   NavListPagesItem,
   NavListPagesLink,
   NavStyled,
+  NavUserIconWrapper,
+  NavUserName,
+  NavUserSvg,
+  NavUserSvgAndNameWrapper,
+  NavUserWrapper,
 } from "../Navigation/Navigation.styled";
 import { Modal } from "@mui/material";
 import { FormComponent } from "../FormComponent/FormComponent";
 import { useLocation } from "react-router-dom";
+import Icons from "../../img/icons.svg";
+import { logOut } from "../../js/getBabysittersListDB";
 
-export const Navigation = () => {
+export const Navigation = ({ isLoggedIn }) => {
   const location = useLocation();
   const [currentPath, setCurrentPath] = useState("");
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [isLogInOrReg, setIsLogInOrReg] = useState("logIn");
+  console.log(isLoggedIn);
 
   useEffect(() => {
     setCurrentPath(location.pathname);
@@ -37,6 +46,9 @@ export const Navigation = () => {
     setIsOpenModal(false);
     setIsLogInOrReg("");
   };
+  const handleLogOut = async () => {
+    logOut();
+  };
 
   return (
     <>
@@ -51,24 +63,40 @@ export const Navigation = () => {
             <NavListPagesItem>
               <NavListPagesLink to="/catalog">Nannies</NavListPagesLink>
             </NavListPagesItem>
-            <NavListPagesItem>
-              <NavListPagesLink to="/favorities">Favorities</NavListPagesLink>
-            </NavListPagesItem>
+            {isLoggedIn && (
+              <NavListPagesItem>
+                <NavListPagesLink to="/favorities">Favorities</NavListPagesLink>
+              </NavListPagesItem>
+            )}
           </NavListPages>
+          {isLoggedIn ? (
+            <NavUserWrapper>
+              <NavUserSvgAndNameWrapper>
+                <NavUserIconWrapper>
+                  <NavUserSvg>
+                    <use href={`${Icons}#icon-user`} />
+                  </NavUserSvg>
+                </NavUserIconWrapper>
+                <NavUserName></NavUserName>
+              </NavUserSvgAndNameWrapper>
 
-          <NavListBtns>
-            <NavListBtnsItem>
-              <NavBtnLogIn onClick={handleOpenModalLogIn}>Log In</NavBtnLogIn>
-            </NavListBtnsItem>
-            <NavListBtnsItem>
-              <NavBtnReg
-                onClick={handleOpenModalReg}
-                $currentPath={currentPath}
-              >
-                Registration
-              </NavBtnReg>
-            </NavListBtnsItem>
-          </NavListBtns>
+              <NavBtnLogOut onClick={handleLogOut}>Log out</NavBtnLogOut>
+            </NavUserWrapper>
+          ) : (
+            <NavListBtns>
+              <NavListBtnsItem>
+                <NavBtnLogIn onClick={handleOpenModalLogIn}>Log In</NavBtnLogIn>
+              </NavListBtnsItem>
+              <NavListBtnsItem>
+                <NavBtnReg
+                  onClick={handleOpenModalReg}
+                  $currentPath={currentPath}
+                >
+                  Registration
+                </NavBtnReg>
+              </NavListBtnsItem>
+            </NavListBtns>
+          )}
         </NavStyled>
       </NavContainer>
       <Modal open={isOpenModal} onClose={handleCloseModal}>

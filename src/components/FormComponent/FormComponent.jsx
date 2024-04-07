@@ -11,9 +11,24 @@ import {
 } from "./FormComponent.styled";
 import Icons from "../../img/icons.svg";
 import PropTypes from "prop-types";
-import { validationSchema } from "./validationSchema";
+import {
+  signInValidationSchema,
+  signUpValidationSchema,
+} from "./validationSchema";
+import { signIn, signUp } from "../../js/getBabysittersListDB";
 
 export const FormComponent = ({ onClose, isLogInOrReg }) => {
+  const onSubmit = (values, { resetForm }) => {
+    const { name, email, password } = values;
+    if (isLogInOrReg === "logIn") {
+      signIn(email, password);
+    } else {
+      signUp(name, email, password);
+    }
+
+    resetForm();
+    onClose();
+  };
   return (
     <FormWrapper>
       <FormSvgCross onClick={onClose}>
@@ -29,7 +44,12 @@ export const FormComponent = ({ onClose, isLogInOrReg }) => {
       </FormSubtitle>
       <Formik
         initialValues={{ name: "", email: "", password: "" }}
-        validationSchema={validationSchema}
+        validationSchema={
+          isLogInOrReg === "logIn"
+            ? signInValidationSchema
+            : signUpValidationSchema
+        }
+        onSubmit={onSubmit}
       >
         <FormStyled>
           <FormWrapperInputs>

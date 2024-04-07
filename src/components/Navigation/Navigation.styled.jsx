@@ -94,3 +94,43 @@ export const NavBtnReg = styled(NavBtnLogIn)`
   border: ${({ $currentPath }) =>
     $currentPath === "/" ? "none" : "1px solid rgba(251, 251, 251, 0.4)"};
 `;
+
+export const NavUserWrapper = styled.div`
+  display: flex;
+  align-items: center;
+
+  gap: 24px;
+`;
+
+export const NavUserIconWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+
+  background-color: #f3f3f3;
+`;
+
+export const NavUserSvg = styled.svg`
+  width: 24px;
+  height: 24px;
+`;
+
+export const NavUserSvgAndNameWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 14px;
+`;
+
+export const NavUserName = styled.p`
+  font-size: 18px;
+  line-height: 111%;
+  letter-spacing: -0.01em;
+  color: #fbfbfb;
+`;
+
+export const NavBtnLogOut = styled(NavBtnReg)`
+  min-width: 134px;
+`;
