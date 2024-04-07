@@ -28,7 +28,6 @@ export const Navigation = ({ isLoggedIn }) => {
   const [currentPath, setCurrentPath] = useState("");
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [isLogInOrReg, setIsLogInOrReg] = useState("logIn");
-  console.log(isLoggedIn);
 
   useEffect(() => {
     setCurrentPath(location.pathname);
