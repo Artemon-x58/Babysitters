@@ -20,14 +20,21 @@ import {
 import { Modal } from "@mui/material";
 import { FormComponent } from "../FormComponent/FormComponent";
 import { useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import Icons from "../../img/icons.svg";
-import { logOut } from "../../js/getBabysittersListDB";
+import { logOut } from "../../redux/auth/authOperations";
+import { useAuth } from "../../hooks/useAuth";
+import { selectUser } from "../../redux/auth/authSelectors";
 
-export const Navigation = ({ isLoggedIn }) => {
-  const location = useLocation();
+export const Navigation = () => {
   const [currentPath, setCurrentPath] = useState("");
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [isLogInOrReg, setIsLogInOrReg] = useState("logIn");
+
+  const location = useLocation();
+  const { isLoggedIn } = useAuth();
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
 
   useEffect(() => {
     setCurrentPath(location.pathname);
@@ -46,7 +53,7 @@ export const Navigation = ({ isLoggedIn }) => {
     setIsLogInOrReg("");
   };
   const handleLogOut = async () => {
-    logOut();
+    dispatch(logOut());
   };
 
   return (
@@ -76,15 +83,19 @@ export const Navigation = ({ isLoggedIn }) => {
                     <use href={`${Icons}#icon-user`} />
                   </NavUserSvg>
                 </NavUserIconWrapper>
-                <NavUserName></NavUserName>
+                <NavUserName>{user.name}</NavUserName>
               </NavUserSvgAndNameWrapper>
 
-              <NavBtnLogOut onClick={handleLogOut}>Log out</NavBtnLogOut>
+              <NavBtnLogOut type="button" onClick={handleLogOut}>
+                Log out
+              </NavBtnLogOut>
             </NavUserWrapper>
           ) : (
             <NavListBtns>
               <NavListBtnsItem>
-                <NavBtnLogIn onClick={handleOpenModalLogIn}>Log In</NavBtnLogIn>
+                <NavBtnLogIn type="button" onClick={handleOpenModalLogIn}>
+                  Log In
+                </NavBtnLogIn>
               </NavListBtnsItem>
               <NavListBtnsItem>
                 <NavBtnReg

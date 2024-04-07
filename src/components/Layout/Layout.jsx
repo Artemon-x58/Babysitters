@@ -2,10 +2,10 @@ import { Suspense } from "react";
 import { AppBar } from "../AppBar/AppBar";
 import { Outlet } from "react-router-dom";
 
-export const Layout = ({ isLoggedIn }) => {
+export const Layout = () => {
   return (
     <>
-      <AppBar isLoggedIn={isLoggedIn} />
+      <AppBar />
       <Suspense fullback={<div>Loading...</div>}>
         <Outlet />
       </Suspense>

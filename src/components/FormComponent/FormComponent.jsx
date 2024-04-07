@@ -1,4 +1,5 @@
 import { Formik } from "formik";
+import { useDispatch } from "react-redux";
 import {
   FormBtn,
   FormInput,
@@ -15,15 +16,15 @@ import {
   signInValidationSchema,
   signUpValidationSchema,
 } from "./validationSchema";
-import { signIn, signUp } from "../../js/getBabysittersListDB";
+import { register, signIn } from "../../redux/auth/authOperations";
 
 export const FormComponent = ({ onClose, isLogInOrReg }) => {
-  const onSubmit = (values, { resetForm }) => {
-    const { name, email, password } = values;
+  const dispatch = useDispatch();
+  const handleOnSubmit = (values, { resetForm }) => {
     if (isLogInOrReg === "logIn") {
-      signIn(email, password);
+      dispatch(signIn(values));
     } else {
-      signUp(name, email, password);
+      dispatch(register(values));
     }
 
     resetForm();
@@ -49,7 +50,7 @@ export const FormComponent = ({ onClose, isLogInOrReg }) => {
             ? signInValidationSchema
             : signUpValidationSchema
         }
-        onSubmit={onSubmit}
+        onSubmit={handleOnSubmit}
       >
         <FormStyled>
           <FormWrapperInputs>
