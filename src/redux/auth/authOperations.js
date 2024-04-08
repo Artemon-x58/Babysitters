@@ -8,7 +8,6 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
-import { get, getDatabase, limitToFirst, query, ref } from "firebase/database";
 
 const firebaseConfig = {
   apiKey: "AIzaSyB5aBo-xRqHvh6wPs9D4rngJbFt7q_X3C8",
@@ -19,23 +18,8 @@ const firebaseConfig = {
   storageBucket: "babysitters-b414b.appspot.com",
   messagingSenderId: "1068081756422",
 };
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
-const babysittersRef = ref(db, "/babysitters");
+initializeApp(firebaseConfig);
 const auth = getAuth();
-
-// export const getBabysittersListDB = async (currentPage, itemsPerPage) => {
-//   try {
-//     const startIndex = (currentPage - 1) * itemsPerPage;
-//     const snapshot = await get(
-//       query(babysittersRef, limitToFirst(startIndex + itemsPerPage))
-//     );
-//     return snapshot.val();
-//   } catch (error) {
-//     console.error("Error fetching babysitters list:", error);
-//     return null;
-//   }
-// };
 
 export const register = createAsyncThunk(
   "auth/register",

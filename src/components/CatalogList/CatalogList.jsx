@@ -1,24 +1,23 @@
+import { useDispatch, useSelector } from "react-redux";
 import { CatalogListBtn, CatalogListStyled } from "./CatalogList.styled";
 import { CatalogItem } from "../CatalogItem/CatalogItem";
 import { Container } from "../Container/Container";
 import { SelectComponent } from "../Select/SelectComponent";
 import { useEffect, useState } from "react";
-import { getBabysittersListDB } from "../../js/getBabysittersListDB";
+import { fetchCatalog } from "../../redux/catalog/catalogOperations";
+import { selectCatalog } from "../../redux/catalog/catalogSelectors";
 
 export const CatalogList = () => {
-  const [listBabysitters, setListBabysitters] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const dispatch = useDispatch();
   const itemsPerPage = 3;
 
   useEffect(() => {
-    getBabysittersListDB(currentPage, itemsPerPage)
-      .then((data) => {
-        setListBabysitters(data);
-      })
-      .catch((error) => {
-        console.error("Error fetching babysitters list:", error);
-      });
+    dispatch(fetchCatalog({ currentPage, itemsPerPage }));
   }, [currentPage]);
+
+  const catalog = useSelector(selectCatalog);
+  console.log(catalog);
 
   const handleNextPage = () => {
     setCurrentPage((prevPage) => prevPage + 1);
@@ -28,7 +27,7 @@ export const CatalogList = () => {
     <Container>
       <SelectComponent />
       <CatalogListStyled>
-        {listBabysitters.map((babysitter, index) => (
+        {catalog.map((babysitter, index) => (
           <CatalogItem key={index} babysitter={babysitter} />
         ))}
       </CatalogListStyled>
