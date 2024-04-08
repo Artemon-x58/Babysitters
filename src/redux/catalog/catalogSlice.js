@@ -16,7 +16,7 @@ const handleRejected = (state, action) => {
 };
 const handleFetchCatalogFulfilled = (state, action) => {
   state.isLoading = false;
-  state.catalog = action.payload;
+  state.catalog = Object.values(action.payload);
 };
 
 const catalogSlice = createSlice({

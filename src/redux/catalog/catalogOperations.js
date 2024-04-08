@@ -1,6 +1,16 @@
 import { initializeApp } from "firebase/app";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { get, getDatabase, limitToFirst, query, ref } from "firebase/database";
+import {
+  endAt,
+  get,
+  getDatabase,
+  limitToFirst,
+  limitToLast,
+  orderByChild,
+  query,
+  ref,
+  startAt,
+} from "firebase/database";
 
 const firebaseConfig = {
   apiKey: "AIzaSyB5aBo-xRqHvh6wPs9D4rngJbFt7q_X3C8",
@@ -17,15 +27,58 @@ const babysittersRef = ref(db, "/babysitters");
 
 export const fetchCatalog = createAsyncThunk(
   "catalog/fetchCatalog",
-  async ({ currentPage, itemsPerPage }, thunkAPI) => {
+  async ({ currentPage, itemsPerPage, filter }, thunkAPI) => {
     try {
       const startIndex = (currentPage - 1) * itemsPerPage;
-      const snapshot = await get(
-        query(babysittersRef, limitToFirst(startIndex + itemsPerPage))
-      );
+      let queryRef;
+
+      switch (filter) {
+        case "a to z":
+          queryRef = query(
+            babysittersRef,
+            orderByChild("name"),
+            limitToFirst(startIndex + itemsPerPage)
+          );
+          break;
+        case "z to a":
+          queryRef = query(
+            babysittersRef,
+            orderByChild("name"),
+            endAt("\uf8ff"),
+            limitToLast(startIndex + itemsPerPage)
+          );
+          break;
+        default:
+          queryRef = query(
+            babysittersRef,
+            limitToFirst(startIndex + itemsPerPage)
+          );
+      }
+
+      const snapshot = await get(queryRef);
       return snapshot.val();
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
+
+// case "z to a":
+//   queryRef = query(
+//     orderByChild("name")
+//       .endAt("")
+//       .limitToFirst(startIndex + itemsPerPage)
+//   );
+//   break;
+// case "less than 10$":
+//   queryRef = query(
+//     orderByChild("price_per_hour").endAt(10),
+//     limitToFirst(startIndex + itemsPerPage)
+//   );
+//   break;
+// case "greater than 10$":
+//   queryRef = query(
+//     orderByChild("price_per_hour").startAt(10),
+//     limitToFirst(startIndex + itemsPerPage)
+//   );
+//   break;
