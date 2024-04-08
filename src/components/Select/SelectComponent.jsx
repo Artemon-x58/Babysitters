@@ -1,5 +1,8 @@
+import { useDispatch } from "react-redux";
 import Select from "react-select";
 import { SelectTitle } from "./SelectComponent.styled";
+import { addFilter } from "../../redux/filter/filterSlice";
+import { useEffect } from "react";
 
 const options = [
   { value: "a to z", label: "A to Z" },
@@ -60,6 +63,15 @@ const customStyles = {
 };
 
 export const SelectComponent = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(addFilter(options[0].value));
+  }, [dispatch]);
+
+  const handleSelectChange = (selectedOption) => {
+    dispatch(addFilter(selectedOption.value));
+  };
   return (
     <>
       <SelectTitle>Filters</SelectTitle>
@@ -67,6 +79,7 @@ export const SelectComponent = () => {
         options={options}
         styles={customStyles}
         defaultValue={options[0]}
+        onChange={handleSelectChange}
       />
     </>
   );

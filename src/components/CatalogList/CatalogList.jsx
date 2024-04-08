@@ -14,10 +14,9 @@ export const CatalogList = () => {
 
   useEffect(() => {
     dispatch(fetchCatalog({ currentPage, itemsPerPage }));
-  }, [currentPage]);
+  }, [currentPage, dispatch]);
 
   const catalog = useSelector(selectCatalog);
-  console.log(catalog);
 
   const handleNextPage = () => {
     setCurrentPage((prevPage) => prevPage + 1);
