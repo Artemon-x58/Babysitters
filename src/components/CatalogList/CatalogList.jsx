@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { fetchCatalog } from "../../redux/catalog/catalogOperations";
 import { selectCatalog } from "../../redux/catalog/catalogSelectors";
 import { selectFilter } from "../../redux/filter/filterSelectors";
+import { sortedCatalog } from "../../js/sortedCatalog";
 
 export const CatalogList = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -22,19 +23,13 @@ export const CatalogList = () => {
     setCurrentPage((prevPage) => prevPage + 1);
   };
 
-  const sortedCatalogAZ = [...catalog].sort((a, b) =>
-    a.name.localeCompare(b.name)
-  );
-
-  const sortedCatalogZA = [...catalog].sort((a, b) =>
-    b.name.localeCompare(a.name)
-  );
+  const newCatalog = sortedCatalog(catalog)[filter];
 
   return (
     <Container>
       <SelectComponent />
       <CatalogListStyled>
-        {sortedCatalogZA.map((babysitter, index) => (
+        {newCatalog.map((babysitter, index) => (
           <CatalogItem key={index} babysitter={babysitter} />
         ))}
       </CatalogListStyled>

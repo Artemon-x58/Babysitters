@@ -48,6 +48,46 @@ export const fetchCatalog = createAsyncThunk(
             limitToLast(startIndex + itemsPerPage)
           );
           break;
+
+        case "less than 10$":
+          queryRef = query(
+            babysittersRef,
+            orderByChild("price_per_hour"),
+            endAt(10),
+            limitToFirst(startIndex + itemsPerPage)
+          );
+          break;
+
+        case "greater than 10$":
+          queryRef = query(
+            babysittersRef,
+            orderByChild("price_per_hour"),
+            startAt(10),
+            limitToLast(startIndex + itemsPerPage)
+          );
+          break;
+
+        case "popular":
+          queryRef = query(
+            babysittersRef,
+            orderByChild("rating"),
+            limitToLast(startIndex + itemsPerPage)
+          );
+          break;
+
+        case "not popular":
+          queryRef = query(
+            babysittersRef,
+            orderByChild("rating"),
+            limitToFirst(startIndex + itemsPerPage)
+          );
+          break;
+        case "show all":
+          queryRef = query(
+            babysittersRef,
+            limitToFirst(startIndex + itemsPerPage)
+          );
+          break;
         default:
           queryRef = query(
             babysittersRef,
@@ -62,23 +102,3 @@ export const fetchCatalog = createAsyncThunk(
     }
   }
 );
-
-// case "z to a":
-//   queryRef = query(
-//     orderByChild("name")
-//       .endAt("")
-//       .limitToFirst(startIndex + itemsPerPage)
-//   );
-//   break;
-// case "less than 10$":
-//   queryRef = query(
-//     orderByChild("price_per_hour").endAt(10),
-//     limitToFirst(startIndex + itemsPerPage)
-//   );
-//   break;
-// case "greater than 10$":
-//   queryRef = query(
-//     orderByChild("price_per_hour").startAt(10),
-//     limitToFirst(startIndex + itemsPerPage)
-//   );
-//   break;
