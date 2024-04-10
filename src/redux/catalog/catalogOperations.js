@@ -48,7 +48,6 @@ export const fetchCatalog = createAsyncThunk(
             limitToLast(startIndex + itemsPerPage)
           );
           break;
-
         case "less than 10$":
           queryRef = query(
             babysittersRef,
@@ -57,7 +56,6 @@ export const fetchCatalog = createAsyncThunk(
             limitToFirst(startIndex + itemsPerPage)
           );
           break;
-
         case "greater than 10$":
           queryRef = query(
             babysittersRef,
@@ -66,7 +64,6 @@ export const fetchCatalog = createAsyncThunk(
             limitToLast(startIndex + itemsPerPage)
           );
           break;
-
         case "popular":
           queryRef = query(
             babysittersRef,
@@ -74,7 +71,6 @@ export const fetchCatalog = createAsyncThunk(
             limitToLast(startIndex + itemsPerPage)
           );
           break;
-
         case "not popular":
           queryRef = query(
             babysittersRef,
