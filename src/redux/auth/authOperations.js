@@ -8,6 +8,7 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
+import { child, getDatabase, push, ref, set } from "firebase/database";
 
 const firebaseConfig = {
   apiKey: "AIzaSyB5aBo-xRqHvh6wPs9D4rngJbFt7q_X3C8",
@@ -18,8 +19,10 @@ const firebaseConfig = {
   storageBucket: "babysitters-b414b.appspot.com",
   messagingSenderId: "1068081756422",
 };
-initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
 const auth = getAuth();
+const usersRef = ref(db, "users");
 
 export const register = createAsyncThunk(
   "auth/register",
@@ -34,6 +37,14 @@ export const register = createAsyncThunk(
       const user = userCredential.user;
 
       await updateProfile(user, { displayName: name });
+
+      const newUserRef = child(usersRef, user.uid);
+
+      await set(newUserRef, {
+        displayName: user.displayName,
+        email: user.email,
+        favorities: "",
+      });
 
       return user;
     } catch (error) {

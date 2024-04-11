@@ -28,9 +28,13 @@ import { useState } from "react";
 export const CatalogItem = ({ babysitter }) => {
   const [isReadMore, setIsReadMore] = useState(false);
 
+  const addToFavorities = (e) => {
+    console.log(e.currentTarget.id);
+  };
   const handleReadMore = () => setIsReadMore(true);
 
   const {
+    id,
     name,
     avatar_url,
     location,
@@ -46,7 +50,7 @@ export const CatalogItem = ({ babysitter }) => {
   } = babysitter;
 
   return (
-    <CatalogItemStyled id={birthday}>
+    <CatalogItemStyled id={id}>
       <CatalogItemImgWrapper>
         <CatalogItemImg src={avatar_url} />
       </CatalogItemImgWrapper>
@@ -77,7 +81,7 @@ export const CatalogItem = ({ babysitter }) => {
               <CatalogItemPriceSpan>{price_per_hour}$</CatalogItemPriceSpan>
             </CatalogItemPropertiesText>
           </CatalogItemPropertiesWrapper>
-          <CatalogItemBtnHeart>
+          <CatalogItemBtnHeart id={id} type="button" onClick={addToFavorities}>
             <CatalogItemHeartSvg>
               <use href={`${Icons}#icon-heart`} />
             </CatalogItemHeartSvg>
@@ -118,6 +122,7 @@ export const CatalogItem = ({ babysitter }) => {
 
 CatalogItem.propTypes = {
   babysitter: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     avatar_url: PropTypes.string.isRequired,
     location: PropTypes.string.isRequired,
