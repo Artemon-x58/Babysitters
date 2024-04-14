@@ -12,6 +12,8 @@ import {
 import { selectFilter } from "../../redux/filter/filterSelectors";
 import { sortedCatalog } from "../../js/sortedCatalog";
 import { Oval } from "react-loader-spinner";
+import { fetchFavorities } from "../../redux/favorities/favoritiesOperations";
+import { selectUser } from "../../redux/auth/authSelectors";
 
 export const CatalogList = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -20,9 +22,12 @@ export const CatalogList = () => {
   const catalog = useSelector(selectCatalog);
   const filter = useSelector(selectFilter);
   const isLoading = useSelector(selectIsLoading);
+  const user = useSelector(selectUser);
+
   useEffect(() => {
     dispatch(fetchCatalog({ currentPage, itemsPerPage, filter }));
-  }, [currentPage, dispatch, filter]);
+    dispatch(fetchFavorities(user));
+  }, [currentPage, dispatch, filter, user]);
 
   const handleNextPage = () => {
     setCurrentPage((prevPage) => prevPage + 1);

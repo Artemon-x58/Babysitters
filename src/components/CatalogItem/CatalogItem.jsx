@@ -24,12 +24,20 @@ import Icons from "../../img/icons.svg";
 import moment from "moment";
 import { ReviewsList } from "../ReviewsList/ReviewsList";
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { selectUser } from "../../redux/auth/authSelectors";
+import { addFavorities } from "../../redux/favorities/favoritiesOperations";
 
 export const CatalogItem = ({ babysitter }) => {
   const [isReadMore, setIsReadMore] = useState(false);
 
-  const addToFavorities = (e) => {
-    console.log(e.currentTarget.id);
+  const user = useSelector(selectUser);
+  const dispatch = useDispatch();
+
+  const handleAddToFavorities = (e) => {
+    const itemId = e.currentTarget.id;
+
+    dispatch(addFavorities({ userId: user.id, itemId }));
   };
   const handleReadMore = () => setIsReadMore(true);
 
@@ -81,7 +89,11 @@ export const CatalogItem = ({ babysitter }) => {
               <CatalogItemPriceSpan>{price_per_hour}$</CatalogItemPriceSpan>
             </CatalogItemPropertiesText>
           </CatalogItemPropertiesWrapper>
-          <CatalogItemBtnHeart id={id} type="button" onClick={addToFavorities}>
+          <CatalogItemBtnHeart
+            id={id}
+            type="button"
+            onClick={handleAddToFavorities}
+          >
             <CatalogItemHeartSvg>
               <use href={`${Icons}#icon-heart`} />
             </CatalogItemHeartSvg>
