@@ -23,24 +23,16 @@ import {
 import Icons from "../../img/icons.svg";
 import moment from "moment";
 import { ReviewsList } from "../ReviewsList/ReviewsList";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectUser } from "../../redux/auth/authSelectors";
-import { addFavorities } from "../../redux/favorities/favoritiesOperations";
+import {
+  addFavorities,
+  deleteFavorities,
+} from "../../redux/favorities/favoritiesOperations";
+import { selectFavorities } from "../../redux/favorities/favoritiesSelectors";
 
 export const CatalogItem = ({ babysitter }) => {
-  const [isReadMore, setIsReadMore] = useState(false);
-
-  const user = useSelector(selectUser);
-  const dispatch = useDispatch();
-
-  const handleAddToFavorities = (e) => {
-    const itemId = e.currentTarget.id;
-
-    dispatch(addFavorities({ userId: user.id, itemId }));
-  };
-  const handleReadMore = () => setIsReadMore(true);
-
   const {
     id,
     name,
@@ -56,6 +48,27 @@ export const CatalogItem = ({ babysitter }) => {
     about,
     reviews,
   } = babysitter;
+  const [isReadMore, setIsReadMore] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  const user = useSelector(selectUser);
+  const favoritiesArr = useSelector(selectFavorities);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const searchFavorities = favoritiesArr.includes(id);
+    setIsFavorite(searchFavorities);
+  }, [favoritiesArr, id]);
+
+  const handleAddToFavorities = () => {
+    if (!isFavorite) {
+      dispatch(addFavorities({ userId: user.id, itemId: id }));
+    } else {
+      dispatch(deleteFavorities({ userId: user.id, itemId: id }));
+    }
+  };
+
+  const handleReadMore = () => setIsReadMore(true);
 
   return (
     <CatalogItemStyled id={id}>
@@ -89,12 +102,8 @@ export const CatalogItem = ({ babysitter }) => {
               <CatalogItemPriceSpan>{price_per_hour}$</CatalogItemPriceSpan>
             </CatalogItemPropertiesText>
           </CatalogItemPropertiesWrapper>
-          <CatalogItemBtnHeart
-            id={id}
-            type="button"
-            onClick={handleAddToFavorities}
-          >
-            <CatalogItemHeartSvg>
+          <CatalogItemBtnHeart type="button" onClick={handleAddToFavorities}>
+            <CatalogItemHeartSvg $isFavorite={isFavorite}>
               <use href={`${Icons}#icon-heart`} />
             </CatalogItemHeartSvg>
           </CatalogItemBtnHeart>

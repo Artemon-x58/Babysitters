@@ -31,7 +31,26 @@ export const addFavorities = createAsyncThunk(
       const currentFavorities = user.favorities || [];
 
       const updateFavorities = [...currentFavorities, itemId];
+      await set(userRef, { ...user, favorities: updateFavorities });
 
+      return updateFavorities;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const deleteFavorities = createAsyncThunk(
+  "favorities/deleteFavorities",
+  async ({ userId, itemId }, thunkAPI) => {
+    try {
+      const userRef = ref(db, `/users/${userId}`);
+      const userSnapshot = await get(userRef);
+      const user = userSnapshot.val();
+
+      const updateFavorities = user.favorities.filter(
+        (item) => item !== itemId
+      );
       await set(userRef, { ...user, favorities: updateFavorities });
 
       return updateFavorities;

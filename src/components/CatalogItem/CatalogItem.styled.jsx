@@ -98,8 +98,8 @@ export const CatalogItemBtnHeart = styled.button`
 export const CatalogItemHeartSvg = styled.svg`
   width: 26px;
   height: 26px;
-  stroke: #11101c;
-  fill: transparent;
+  stroke: ${({ $isFavorite }) => ($isFavorite ? "transparent" : "#11101c")};
+  fill: ${({ $isFavorite }) => ($isFavorite ? "#F03F3B" : "transparent")};
 `;
 
 export const CatalogItemName = styled.h2`

@@ -1,16 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addFavorities, fetchFavorities } from "./favoritiesOperations";
+import {
+  addFavorities,
+  deleteFavorities,
+  fetchFavorities,
+} from "./favoritiesOperations";
 
 const initialState = {
   favorities: [],
 };
 
 const handleFetchFavoritiesFulfilled = (state, action) => {
-  console.log(action.payload);
-  state.favorities = Object.values(action.payload);
+  state.favorities = Object.values(action.payload || []);
 };
 const handleAddFavorities = (state, action) => {
-  state.favorities = Object.values(action.payload);
+  state.favorities = action.payload;
+};
+const handleDeleteFavorities = (state, action) => {
+  state.favorities = action.payload;
 };
 
 const favoritiesSlice = createSlice({
@@ -19,7 +25,8 @@ const favoritiesSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchFavorities.fulfilled, handleFetchFavoritiesFulfilled)
-      .addCase(addFavorities.fulfilled, handleAddFavorities);
+      .addCase(addFavorities.fulfilled, handleAddFavorities)
+      .addCase(deleteFavorities.fulfilled, handleDeleteFavorities);
   },
 });
 
