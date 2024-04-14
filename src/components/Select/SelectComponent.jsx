@@ -2,7 +2,8 @@ import { useDispatch } from "react-redux";
 import Select from "react-select";
 import { SelectTitle } from "./SelectComponent.styled";
 import { addFilter } from "../../redux/filter/filterSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Container } from "../Container/Container";
 
 const options = [
   { value: "a to z", label: "A to Z" },
@@ -20,12 +21,10 @@ const customStyles = {
     marginBottom: "32px",
     padding: "14px 18px 14px 18px",
     width: "226px",
-
     border: isFocused && "none",
     borderRadius: "14px",
     backgroundColor: " #f03f3b",
     boxShadow: isFocused && "none",
-
     fontSize: "18px",
     lineHeight: "111%",
     color: "#fbfbfb",
@@ -33,11 +32,9 @@ const customStyles = {
   menu: (provided) => ({
     ...provided,
     width: "226px",
-
     borderRadius: "14px",
     background: "#fff",
     boxShadow: "0 20px 69px 0 rgba(0, 0, 0, 0.07)",
-
     fontWeight: "400",
     fontSize: "18px",
     lineHeight: "111%",
@@ -63,24 +60,23 @@ const customStyles = {
 };
 
 export const SelectComponent = () => {
+  const [activeOption, setActiveOption] = useState(options[0]);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(addFilter(options[0].value));
-  }, [dispatch]);
-
   const handleSelectChange = (selectedOption) => {
+    setActiveOption(selectedOption);
     dispatch(addFilter(selectedOption.value));
   };
+
   return (
-    <>
+    <Container>
       <SelectTitle>Filters</SelectTitle>
       <Select
         options={options}
         styles={customStyles}
-        defaultValue={options[0]}
+        defaultValue={activeOption}
         onChange={handleSelectChange}
       />
-    </>
+    </Container>
   );
 };

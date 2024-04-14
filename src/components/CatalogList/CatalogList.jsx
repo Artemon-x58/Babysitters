@@ -55,7 +55,6 @@ export const CatalogList = () => {
         />
       ) : (
         <>
-          <SelectComponent />
           <CatalogListStyled>
             {pathname === "/catalog"
               ? newCatalog.map((babysitter, index) => (
