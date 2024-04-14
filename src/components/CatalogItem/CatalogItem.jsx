@@ -31,6 +31,7 @@ import {
   deleteFavorities,
 } from "../../redux/favorities/favoritiesOperations";
 import { selectFavorities } from "../../redux/favorities/favoritiesSelectors";
+import { selectCatalog } from "../../redux/catalog/catalogSelectors";
 
 export const CatalogItem = ({ babysitter }) => {
   const {
@@ -53,16 +54,19 @@ export const CatalogItem = ({ babysitter }) => {
 
   const user = useSelector(selectUser);
   const favoritiesArr = useSelector(selectFavorities);
+  const catalog = useSelector(selectCatalog);
   const dispatch = useDispatch();
 
+  const catalogFavoritiesItem = catalog.find((item) => item.id === id);
+
   useEffect(() => {
-    const searchFavorities = favoritiesArr.includes(id);
+    const searchFavorities = favoritiesArr.some((item) => item.id === id);
     setIsFavorite(searchFavorities);
   }, [favoritiesArr, id]);
 
   const handleAddToFavorities = () => {
     if (!isFavorite) {
-      dispatch(addFavorities({ userId: user.id, itemId: id }));
+      dispatch(addFavorities({ userId: user.id, catalogFavoritiesItem }));
     } else {
       dispatch(deleteFavorities({ userId: user.id, itemId: id }));
     }

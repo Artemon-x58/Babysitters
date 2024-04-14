@@ -10,7 +10,7 @@ const initialState = {
 };
 
 const handleFetchFavoritiesFulfilled = (state, action) => {
-  state.favorities = Object.values(action.payload || []);
+  state.favorities = action.payload || [];
 };
 const handleAddFavorities = (state, action) => {
   state.favorities = action.payload;

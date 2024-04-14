@@ -22,7 +22,7 @@ export const fetchFavorities = createAsyncThunk(
 
 export const addFavorities = createAsyncThunk(
   "favorite/addFavorities",
-  async ({ userId, itemId }, thunkAPI) => {
+  async ({ userId, catalogFavoritiesItem }, thunkAPI) => {
     try {
       const userRef = ref(db, `/users/${userId}`);
 
@@ -30,7 +30,7 @@ export const addFavorities = createAsyncThunk(
       const user = userSnapshot.val();
       const currentFavorities = user.favorities || [];
 
-      const updateFavorities = [...currentFavorities, itemId];
+      const updateFavorities = [...currentFavorities, catalogFavoritiesItem];
       await set(userRef, { ...user, favorities: updateFavorities });
 
       return updateFavorities;
@@ -49,7 +49,7 @@ export const deleteFavorities = createAsyncThunk(
       const user = userSnapshot.val();
 
       const updateFavorities = user.favorities.filter(
-        (item) => item !== itemId
+        (item) => item.id !== itemId
       );
       await set(userRef, { ...user, favorities: updateFavorities });
 

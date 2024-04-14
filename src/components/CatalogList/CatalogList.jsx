@@ -1,3 +1,4 @@
+import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { CatalogListBtn, CatalogListStyled } from "./CatalogList.styled";
 import { CatalogItem } from "../CatalogItem/CatalogItem";
@@ -14,6 +15,7 @@ import { sortedCatalog } from "../../js/sortedCatalog";
 import { Oval } from "react-loader-spinner";
 import { fetchFavorities } from "../../redux/favorities/favoritiesOperations";
 import { selectUser } from "../../redux/auth/authSelectors";
+import { selectFavorities } from "../../redux/favorities/favoritiesSelectors";
 
 export const CatalogList = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -22,12 +24,15 @@ export const CatalogList = () => {
   const catalog = useSelector(selectCatalog);
   const filter = useSelector(selectFilter);
   const isLoading = useSelector(selectIsLoading);
+  const faforitiesCatalog = useSelector(selectFavorities);
   const user = useSelector(selectUser);
+  const { pathname } = useLocation();
 
   useEffect(() => {
     dispatch(fetchCatalog({ currentPage, itemsPerPage, filter }));
+    pathname === "/favorities";
     dispatch(fetchFavorities(user));
-  }, [currentPage, dispatch, filter, user]);
+  }, [pathname, currentPage, dispatch, filter, user]);
 
   const handleNextPage = () => {
     setCurrentPage((prevPage) => prevPage + 1);
@@ -52,9 +57,13 @@ export const CatalogList = () => {
         <>
           <SelectComponent />
           <CatalogListStyled>
-            {newCatalog.map((babysitter, index) => (
-              <CatalogItem key={index} babysitter={babysitter} />
-            ))}
+            {pathname === "/catalog"
+              ? newCatalog.map((babysitter, index) => (
+                  <CatalogItem key={index} babysitter={babysitter} />
+                ))
+              : faforitiesCatalog.map((babysitter, index) => (
+                  <CatalogItem key={index} babysitter={babysitter} />
+                ))}
           </CatalogListStyled>
           <CatalogListBtn onClick={handleNextPage}>Load more</CatalogListBtn>
         </>
