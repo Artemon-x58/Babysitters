@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import Select from "react-select";
 import { SelectTitle } from "./SelectComponent.styled";
 import { addFilter } from "../../redux/filter/filterSlice";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Container } from "../Container/Container";
 
 const options = [

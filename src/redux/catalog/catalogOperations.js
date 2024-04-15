@@ -88,6 +88,7 @@ export const fetchCatalog = createAsyncThunk(
       const snapshotLength = await get(babysittersRef);
       const cardsArray = snapshotLength.val();
       const catalogLength = Object.values(cardsArray).length;
+
       const catalog = {
         catalogList: snapshot.val(),
         catalogLength,

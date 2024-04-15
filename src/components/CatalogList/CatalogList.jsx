@@ -31,7 +31,6 @@ export const CatalogList = () => {
 
   useEffect(() => {
     dispatch(fetchCatalog({ currentPage, itemsPerPage, filter }));
-    pathname === "/favorities";
     dispatch(fetchFavorities(user));
   }, [pathname, currentPage, dispatch, filter, user]);
 
