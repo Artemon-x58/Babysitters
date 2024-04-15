@@ -84,7 +84,15 @@ export const fetchCatalog = createAsyncThunk(
       }
 
       const snapshot = await get(queryRef);
-      return snapshot.val();
+
+      const snapshotLength = await get(babysittersRef);
+      const cardsArray = snapshotLength.val();
+      const catalogLength = Object.values(cardsArray).length;
+      const catalog = {
+        catalogList: snapshot.val(),
+        catalogLength,
+      };
+      return catalog;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

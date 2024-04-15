@@ -3,6 +3,7 @@ import { fetchCatalog } from "./catalogOperations";
 
 const catalogInitialState = {
   catalog: [],
+  catalogLength: 0,
   isLoading: false,
   error: null,
 };
@@ -16,7 +17,8 @@ const handleRejected = (state, action) => {
 };
 const handleFetchCatalogFulfilled = (state, action) => {
   state.isLoading = false;
-  state.catalog = Object.values(action.payload);
+  state.catalog = Object.values(action.payload.catalogList);
+  state.catalogLength = action.payload.catalogLength;
 };
 
 const catalogSlice = createSlice({
