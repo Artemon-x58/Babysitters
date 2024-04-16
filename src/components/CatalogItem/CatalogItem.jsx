@@ -1,4 +1,6 @@
 import PropTypes from "prop-types";
+import Alert from "@mui/material/Alert";
+import Stack from "@mui/material/Stack";
 import { CatalogItemInfo } from "../CatalogItemInfo/CatalogItemInfo";
 import {
   CatalogItemBtnHeart,
@@ -25,13 +27,16 @@ import moment from "moment";
 import { ReviewsList } from "../ReviewsList/ReviewsList";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { selectUser } from "../../redux/auth/authSelectors";
+import { selectIsLoggedIn, selectUser } from "../../redux/auth/authSelectors";
 import {
   addFavorities,
   deleteFavorities,
 } from "../../redux/favorities/favoritiesOperations";
 import { selectFavorities } from "../../redux/favorities/favoritiesSelectors";
-import { selectCatalog } from "../../redux/catalog/catalogSelectors";
+import {
+  selectCatalog,
+  selectIsLoading,
+} from "../../redux/catalog/catalogSelectors";
 
 export const CatalogItem = ({ babysitter }) => {
   const {
@@ -51,7 +56,9 @@ export const CatalogItem = ({ babysitter }) => {
   } = babysitter;
   const [isReadMore, setIsReadMore] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [isShowAlert, setIsShowAlert] = useState(false);
 
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   const user = useSelector(selectUser);
   const favoritiesArr = useSelector(selectFavorities);
   const catalog = useSelector(selectCatalog);
@@ -64,7 +71,14 @@ export const CatalogItem = ({ babysitter }) => {
     setIsFavorite(searchFavorities);
   }, [favoritiesArr, id]);
 
+  const handleHeartCleck = () => {
+    if (!isLoggedIn) {
+      setIsShowAlert(true);
+    }
+  };
+
   const handleAddToFavorities = () => {
+    handleHeartCleck();
     if (!isFavorite) {
       dispatch(addFavorities({ userId: user.id, catalogFavoritiesItem }));
     } else {
@@ -141,6 +155,11 @@ export const CatalogItem = ({ babysitter }) => {
           </CatalogItemButton>
         )}
       </CatalogItemMainWrapper>
+      {isShowAlert && (
+        <Stack sx={{ width: "100%" }} spacing={2}>
+          <Alert severity="info">This is an info Alert.</Alert>
+        </Stack>
+      )}
     </CatalogItemStyled>
   );
 };
