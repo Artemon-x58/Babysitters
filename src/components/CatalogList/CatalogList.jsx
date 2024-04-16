@@ -39,6 +39,7 @@ export const CatalogList = () => {
   };
 
   const newCatalog = sortedCatalog(catalog)[filter];
+  const newCatalogFavorities = sortedCatalog(faforitiesCatalog)[filter];
 
   const wrapperStyle = {
     justifyContent: "center",
@@ -60,7 +61,7 @@ export const CatalogList = () => {
               ? newCatalog.map((babysitter, index) => (
                   <CatalogItem key={index} babysitter={babysitter} />
                 ))
-              : faforitiesCatalog.map((babysitter, index) => (
+              : newCatalogFavorities.map((babysitter, index) => (
                   <CatalogItem key={index} babysitter={babysitter} />
                 ))}
           </CatalogListStyled>
