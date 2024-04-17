@@ -1,6 +1,8 @@
-import { Formik } from "formik";
+import { ErrorMessage, Formik } from "formik";
 import { useDispatch } from "react-redux";
 import {
+  CustomErrorMessage,
+  ErrorWrapper,
   FormBtn,
   FormInput,
   FormStyled,
@@ -55,10 +57,19 @@ export const FormComponent = ({ onClose, isLogInOrReg }) => {
         <FormStyled>
           <FormWrapperInputs>
             {isLogInOrReg === "registration" && (
-              <FormInput id="name" name="name" placeholder="Name" />
+              <ErrorWrapper>
+                <FormInput id="name" name="name" placeholder="Name" />
+                <ErrorMessage name="name" component={CustomErrorMessage} />
+              </ErrorWrapper>
             )}
-            <FormInput id="email" name="email" placeholder="Email" />
-            <FormInput id="password" name="password" placeholder="Password" />
+            <ErrorWrapper>
+              <FormInput id="email" name="email" placeholder="Email" />
+              <ErrorMessage name="email" component={CustomErrorMessage} />
+            </ErrorWrapper>
+            <ErrorWrapper>
+              <FormInput id="password" name="password" placeholder="Password" />
+              <ErrorMessage name="password" component={CustomErrorMessage} />
+            </ErrorWrapper>
           </FormWrapperInputs>
 
           <FormBtn type="submit">

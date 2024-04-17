@@ -50,6 +50,7 @@ export const FormWrapperInputs = styled.div`
 `;
 
 export const FormInput = styled(Field)`
+  width: 100%;
   padding: 16px 18px;
   border: 1px solid rgba(17, 16, 28, 0.1);
   border-radius: 12px;
@@ -80,4 +81,18 @@ export const FormBtn = styled.button`
   line-height: 125%;
   letter-spacing: -0.01em;
   color: #fbfbfb;
+`;
+
+export const ErrorWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+`;
+
+export const CustomErrorMessage = styled.p`
+  font-size: 16px;
+  line-height: 125%;
+  letter-spacing: -0.01em;
+  color: red;
 `;
