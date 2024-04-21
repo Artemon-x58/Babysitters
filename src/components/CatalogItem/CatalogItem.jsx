@@ -1,6 +1,4 @@
 import PropTypes from "prop-types";
-import Alert from "@mui/material/Alert";
-import Stack from "@mui/material/Stack";
 import { CatalogItemInfo } from "../CatalogItemInfo/CatalogItemInfo";
 import {
   CatalogItemBtnHeart,
@@ -34,6 +32,9 @@ import {
 } from "../../redux/favorities/favoritiesOperations";
 import { selectFavorities } from "../../redux/favorities/favoritiesSelectors";
 import { selectCatalog } from "../../redux/catalog/catalogSelectors";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastComponent } from "../ToastComponent/ToastComponent";
 
 export const CatalogItem = ({ babysitter }) => {
   const {
@@ -66,16 +67,19 @@ export const CatalogItem = ({ babysitter }) => {
   useEffect(() => {
     const searchFavorities = favoritiesArr.some((item) => item.id === id);
     setIsFavorite(searchFavorities);
-  }, [favoritiesArr, id]);
+    // setIsShowAlert(isLoggedIn);
+  }, [favoritiesArr, id, isLoggedIn]);
 
-  const handleHeartClick = () => {
+  const notify = () => {
     if (!isLoggedIn) {
-      setIsShowAlert(true);
+      toast.info(
+        "This functionality is only available for authenticated users."
+      );
     }
   };
 
   const handleAddToFavorities = () => {
-    handleHeartClick();
+    notify();
     if (!isFavorite) {
       dispatch(addFavorities({ userId: user.id, catalogFavoritiesItem }));
     } else {
@@ -152,11 +156,7 @@ export const CatalogItem = ({ babysitter }) => {
           </CatalogItemButton>
         )}
       </CatalogItemMainWrapper>
-      {isShowAlert && (
-        <Stack sx={{ width: "100%" }} spacing={2}>
-          <Alert severity="info">This is an info Alert.</Alert>
-        </Stack>
-      )}
+      {!isLoggedIn && <ToastComponent />}
     </CatalogItemStyled>
   );
 };
