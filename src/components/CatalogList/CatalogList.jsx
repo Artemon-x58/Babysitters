@@ -16,6 +16,7 @@ import { Oval } from "react-loader-spinner";
 import { fetchFavorities } from "../../redux/favorities/favoritiesOperations";
 import { selectUser } from "../../redux/auth/authSelectors";
 import { selectFavorities } from "../../redux/favorities/favoritiesSelectors";
+import { NotFounds } from "../NotFounds/NotFounds";
 
 export const CatalogList = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -24,7 +25,7 @@ export const CatalogList = () => {
   const catalog = useSelector(selectCatalog);
   const filter = useSelector(selectFilter);
   const isLoading = useSelector(selectIsLoading);
-  const faforitiesCatalog = useSelector(selectFavorities);
+  const favoritesCatalog = useSelector(selectFavorities);
   const user = useSelector(selectUser);
   const catalogLength = useSelector(selectCatalogLength);
   const { pathname } = useLocation();
@@ -39,7 +40,7 @@ export const CatalogList = () => {
   };
 
   const newCatalog = sortedCatalog(catalog)[filter];
-  const newCatalogFavorities = sortedCatalog(faforitiesCatalog)[filter];
+  const newCatalogFavorites = sortedCatalog(favoritesCatalog)[filter];
 
   const wrapperStyle = {
     justifyContent: "center",
@@ -61,10 +62,16 @@ export const CatalogList = () => {
               ? newCatalog.map((babysitter, index) => (
                   <CatalogItem key={index} babysitter={babysitter} />
                 ))
-              : newCatalogFavorities.map((babysitter, index) => (
+              : newCatalogFavorites.map((babysitter, index) => (
                   <CatalogItem key={index} babysitter={babysitter} />
                 ))}
           </CatalogListStyled>
+
+          {(pathname === "/catalog" && newCatalog.length === 0) ||
+          (pathname === "/favorities" && newCatalogFavorites.length === 0) ? (
+            <NotFounds />
+          ) : null}
+
           {catalogLength > newCatalog.length && (
             <CatalogListBtn onClick={handleNextPage}>Load more</CatalogListBtn>
           )}
