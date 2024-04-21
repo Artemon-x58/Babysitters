@@ -33,10 +33,7 @@ import {
   deleteFavorities,
 } from "../../redux/favorities/favoritiesOperations";
 import { selectFavorities } from "../../redux/favorities/favoritiesSelectors";
-import {
-  selectCatalog,
-  selectIsLoading,
-} from "../../redux/catalog/catalogSelectors";
+import { selectCatalog } from "../../redux/catalog/catalogSelectors";
 
 export const CatalogItem = ({ babysitter }) => {
   const {
@@ -71,14 +68,14 @@ export const CatalogItem = ({ babysitter }) => {
     setIsFavorite(searchFavorities);
   }, [favoritiesArr, id]);
 
-  const handleHeartCleck = () => {
+  const handleHeartClick = () => {
     if (!isLoggedIn) {
       setIsShowAlert(true);
     }
   };
 
   const handleAddToFavorities = () => {
-    handleHeartCleck();
+    handleHeartClick();
     if (!isFavorite) {
       dispatch(addFavorities({ userId: user.id, catalogFavoritiesItem }));
     } else {

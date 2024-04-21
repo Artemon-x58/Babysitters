@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux";
 import Select from "react-select";
 import { SelectTitle } from "./SelectComponent.styled";
-import { addFilter } from "../../redux/filter/filterSlice";
-import { useState } from "react";
+import { addFilter, resetFilter } from "../../redux/filter/filterSlice";
+import { useEffect, useState } from "react";
 import { Container } from "../Container/Container";
 
 const options = [
@@ -62,6 +62,10 @@ const customStyles = {
 export const SelectComponent = () => {
   const [activeOption, setActiveOption] = useState(options[0]);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(resetFilter());
+  }, [dispatch]);
 
   const handleSelectChange = (selectedOption) => {
     setActiveOption(selectedOption);
