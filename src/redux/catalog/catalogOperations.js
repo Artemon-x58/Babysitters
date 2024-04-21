@@ -84,14 +84,28 @@ export const fetchCatalog = createAsyncThunk(
       }
 
       const snapshot = await get(queryRef);
+      const queryFilterLessThan = query(
+        babysittersRef,
+        orderByChild("price_per_hour"),
+        endAt(10)
+      );
 
-      const snapshotLength = await get(babysittersRef);
-      const cardsArray = snapshotLength.val();
-      const catalogLength = Object.values(cardsArray).length;
+      const entireCatalog = (await get(babysittersRef)).val();
+      const filterLessThan = (await get(queryFilterLessThan)).val();
+
+      const catalogLength = Object.values(entireCatalog).length;
+      const filterLessThanQueryLength = Object.values(filterLessThan).length;
+      const filterGreaterThanQueryLength =
+        catalogLength - filterLessThanQueryLength;
 
       const catalog = {
         catalogList: snapshot.val(),
-        catalogLength,
+        catalogLength:
+          filter === "less than 10$"
+            ? filterLessThanQueryLength
+            : filter === "greater than 10$"
+            ? filterGreaterThanQueryLength
+            : catalogLength,
       };
       return catalog;
     } catch (error) {

@@ -32,7 +32,7 @@ import {
 } from "../../redux/favorities/favoritiesOperations";
 import { selectFavorities } from "../../redux/favorities/favoritiesSelectors";
 import { selectCatalog } from "../../redux/catalog/catalogSelectors";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastComponent } from "../ToastComponent/ToastComponent";
 
@@ -54,7 +54,6 @@ export const CatalogItem = ({ babysitter }) => {
   } = babysitter;
   const [isReadMore, setIsReadMore] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
-  const [isShowAlert, setIsShowAlert] = useState(false);
 
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const user = useSelector(selectUser);

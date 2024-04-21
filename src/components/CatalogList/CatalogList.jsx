@@ -20,7 +20,8 @@ import { NotFounds } from "../NotFounds/NotFounds";
 
 export const CatalogList = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const dispatch = useDispatch();
+  const [hasFetched, setHasFetched] = useState(false);
+
   const itemsPerPage = 3;
   const catalog = useSelector(selectCatalog);
   const filter = useSelector(selectFilter);
@@ -30,17 +31,22 @@ export const CatalogList = () => {
   const catalogLength = useSelector(selectCatalogLength);
   const { pathname } = useLocation();
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(fetchCatalog({ currentPage, itemsPerPage, filter }));
     dispatch(fetchFavorities(user));
+    setHasFetched(true);
   }, [pathname, currentPage, dispatch, filter, user]);
 
   const handleNextPage = () => {
     setCurrentPage((prevPage) => prevPage + 1);
   };
 
-  const newCatalog = sortedCatalog(catalog)[filter];
-  const newCatalogFavorites = sortedCatalog(favoritesCatalog)[filter];
+  const newCatalog =
+    pathname === "/catalog"
+      ? sortedCatalog(catalog)[filter]
+      : sortedCatalog(favoritesCatalog)[filter];
 
   const wrapperStyle = {
     justifyContent: "center",
@@ -52,29 +58,23 @@ export const CatalogList = () => {
         <Oval
           color="#f03f3b"
           secondaryColor="transparent"
-          style={{ justifyContent: "center" }}
           wrapperStyle={wrapperStyle}
         />
       ) : (
         <>
           <CatalogListStyled>
-            {pathname === "/catalog"
-              ? newCatalog.map((babysitter, index) => (
-                  <CatalogItem key={index} babysitter={babysitter} />
-                ))
-              : newCatalogFavorites.map((babysitter, index) => (
-                  <CatalogItem key={index} babysitter={babysitter} />
-                ))}
+            {newCatalog.map((babysitter, index) => (
+              <CatalogItem key={index} babysitter={babysitter} />
+            ))}
           </CatalogListStyled>
-
-          {(pathname === "/catalog" && newCatalog.length === 0) ||
-          (pathname === "/favorities" && newCatalogFavorites.length === 0) ? (
-            <NotFounds />
-          ) : null}
-
-          {catalogLength > newCatalog.length && (
-            <CatalogListBtn onClick={handleNextPage}>Load more</CatalogListBtn>
-          )}
+          {hasFetched && newCatalog.length === 0 && <NotFounds />}
+          {hasFetched &&
+            catalogLength > newCatalog.length &&
+            newCatalog.length > 0 && (
+              <CatalogListBtn onClick={handleNextPage}>
+                Load more
+              </CatalogListBtn>
+            )}
         </>
       )}
     </Container>
