@@ -8,8 +8,9 @@ export const AppointmentFormWrapper = styled.div`
   transform: translate(-50%, -50%);
   padding: 64px;
 
+  width: 40%;
   border-radius: 30px;
-  height: 80%;
+  height: 90vh;
   overflow-y: auto;
   background: #fbfbfb;
 `;
@@ -85,6 +86,7 @@ export const FormInputAppointment = styled(Field)`
   padding: 16px 18px;
   border: 1px solid rgba(17, 16, 28, 0.1);
   border-radius: 12px;
+  background-color: #fbfbfb;
 
   font-weight: 400;
   font-size: 16px;

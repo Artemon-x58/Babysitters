@@ -12,7 +12,9 @@ export const FormWrapper = styled.div`
   background: #fbfbfb;
 `;
 
-export const FormStyled = styled(Form)``;
+export const FormStyled = styled(Form)`
+  overflow-y: auto;
+`;
 
 export const FormSvgCross = styled.svg`
   position: absolute;

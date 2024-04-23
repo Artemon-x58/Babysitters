@@ -20,6 +20,7 @@ import {
   FormStyled,
   FormSvgCross,
 } from "../FormComponent/FormComponent.styled";
+import { TimePicker } from "../Timepicker/Timepicker";
 
 export const AppointmentForm = ({ avatar, name, onClose }) => {
   return (
@@ -70,7 +71,13 @@ export const AppointmentForm = ({ avatar, name, onClose }) => {
               name="age"
               placeholder="Child's age"
             />
-            <FormInputAppointment id="time" name="time" placeholder="Time" />
+            <TimePicker />
+            {/* <FormInputAppointment
+              type="time"
+              id="time"
+              name="time"
+              placeholder="Time"
+            /> */}
           </AppointmentFormWrapperGrid>
           <AppointmentFormInputsWrapper>
             <FormInputAppointment id="email" name="email" placeholder="Email" />
