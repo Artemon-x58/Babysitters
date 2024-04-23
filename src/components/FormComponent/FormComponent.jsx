@@ -67,7 +67,12 @@ export const FormComponent = ({ onClose, isLogInOrReg }) => {
               <ErrorMessage name="email" component={CustomErrorMessage} />
             </ErrorWrapper>
             <ErrorWrapper>
-              <FormInput id="password" name="password" placeholder="Password" />
+              <FormInput
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Password"
+              />
               <ErrorMessage name="password" component={CustomErrorMessage} />
             </ErrorWrapper>
           </FormWrapperInputs>

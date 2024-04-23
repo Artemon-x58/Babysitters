@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import "react-datetime/css/react-datetime.css";
-import Datetime from "react-datetime";
 import {
   AppointmentFormBtn,
   AppointmentFormImg,
@@ -11,20 +10,18 @@ import {
   AppointmentFormTitle,
   AppointmentFormWrapper,
   AppointmentFormWrapperNanny,
+  AppointmentFormWrapperGrid,
+  FormInputAppointment,
+  AppointmentFormInputsWrapper,
 } from "./AppointmentForm.styled";
 import { Formik } from "formik";
 import Icons from "../../img/icons.svg";
 import {
-  FormInput,
   FormStyled,
   FormSvgCross,
 } from "../FormComponent/FormComponent.styled";
 
 export const AppointmentForm = ({ avatar, name, onClose }) => {
-  let inputProps = {
-    placeholder: "00:00",
-  };
-
   return (
     <AppointmentFormWrapper>
       <FormSvgCross onClick={onClose}>
@@ -57,22 +54,39 @@ export const AppointmentForm = ({ avatar, name, onClose }) => {
         }}
       >
         <FormStyled>
-          <Datetime
-            inputProps={inputProps}
-            dateFormat={false}
-            timeFormat="hh-mm"
-            timeConstraints={{ minutes: { step: 30 } }}
-          />
-          <FormInput id="address" name="address" placeholder="Address" />
-          <FormInput id="number" name="number" placeholder="+380" />
-          <FormInput id="age" name="age" placeholder="Child's age" />
-          <FormInput id="email" name="email" placeholder="Email" />
-          <FormInput
-            id="parent"
-            name="parent"
-            placeholder="Father's or mother's name"
-          />
-          <FormInput id="comment" name="comment" placeholder="Comment" />
+          <AppointmentFormWrapperGrid>
+            <FormInputAppointment
+              id="address"
+              name="address"
+              placeholder="Address"
+            />
+            <FormInputAppointment
+              id="number"
+              name="number"
+              placeholder="+380"
+            />
+            <FormInputAppointment
+              id="age"
+              name="age"
+              placeholder="Child's age"
+            />
+            <FormInputAppointment id="time" name="time" placeholder="Time" />
+          </AppointmentFormWrapperGrid>
+          <AppointmentFormInputsWrapper>
+            <FormInputAppointment id="email" name="email" placeholder="Email" />
+            <FormInputAppointment
+              id="parent"
+              name="parent"
+              placeholder="Father's or mother's name"
+            />
+            <FormInputAppointment
+              as="textarea"
+              id="comment"
+              name="comment"
+              placeholder="Comment"
+            />
+          </AppointmentFormInputsWrapper>
+
           <AppointmentFormBtn type="submit">Send</AppointmentFormBtn>
         </FormStyled>
       </Formik>

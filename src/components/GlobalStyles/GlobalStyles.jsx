@@ -3,7 +3,11 @@ import "../../fonts/stylesheet.css";
 
 export const GlobalStyles = createGlobalStyle`
   
-
+  *,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
   body {
     font-family: "Helvetica Neue", sans-serif;
@@ -14,7 +18,7 @@ export const GlobalStyles = createGlobalStyle`
     
     
   }
-
+  
   h1, h2, h3, h4, h5, h6, p {
     margin: 0;
   }
@@ -62,4 +66,23 @@ label {
 span {
   margin: 0;
 }
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #b0b0b0;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #808080;
+  }
 `;

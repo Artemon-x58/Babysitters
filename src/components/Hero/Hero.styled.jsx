@@ -61,8 +61,8 @@ export const HeroBtn = styled(Link)`
   border: 1px solid rgba(251, 251, 251, 0.4);
   border-radius: 30px;
   padding: 18px 50px;
-  width: 135px;
-  height: 24px;
+  width: 235px;
+  height: 60px;
   background: transparent;
 
   font-size: 20px;
@@ -78,7 +78,7 @@ export const HeroBtn = styled(Link)`
 `;
 
 export const HeroBtnSvg = styled.svg`
-  margin-left: 18px;
+  margin-left: 16px;
   width: 15px;
   height: 17px;
   transition: transform 250ms linear;

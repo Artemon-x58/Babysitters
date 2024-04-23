@@ -66,7 +66,6 @@ export const CatalogItem = ({ babysitter }) => {
   useEffect(() => {
     const searchFavorities = favoritiesArr.some((item) => item.id === id);
     setIsFavorite(searchFavorities);
-    // setIsShowAlert(isLoggedIn);
   }, [favoritiesArr, id, isLoggedIn]);
 
   const notify = () => {
