@@ -90,7 +90,7 @@ export const CatalogItem = ({ babysitter }) => {
   return (
     <CatalogItemStyled id={id}>
       <CatalogItemImgWrapper>
-        <CatalogItemImg src={avatar_url} />
+        <CatalogItemImg src={avatar_url} alt={name} />
       </CatalogItemImgWrapper>
       <CatalogItemMainWrapper>
         <CatalogItemProffesionWrapper>
