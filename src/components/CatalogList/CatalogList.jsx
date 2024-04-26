@@ -17,6 +17,7 @@ import { fetchFavorities } from "../../redux/favorities/favoritiesOperations";
 import { selectUser } from "../../redux/auth/authSelectors";
 import { selectFavorities } from "../../redux/favorities/favoritiesSelectors";
 import { NotFounds } from "../NotFounds/NotFounds";
+import { ToastComponent } from "../ToastComponent/ToastComponent";
 
 export const CatalogList = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -53,30 +54,33 @@ export const CatalogList = () => {
   };
 
   return (
-    <Container>
-      {isLoading ? (
-        <Oval
-          color="#f03f3b"
-          secondaryColor="transparent"
-          wrapperStyle={wrapperStyle}
-        />
-      ) : (
-        <>
-          <CatalogListStyled>
-            {newCatalog.map((babysitter, index) => (
-              <CatalogItem key={index} babysitter={babysitter} />
-            ))}
-          </CatalogListStyled>
-          {hasFetched && newCatalog.length === 0 && <NotFounds />}
-          {hasFetched &&
-            catalogLength > newCatalog.length &&
-            newCatalog.length > 0 && (
-              <CatalogListBtn onClick={handleNextPage}>
-                Load more
-              </CatalogListBtn>
-            )}
-        </>
-      )}
-    </Container>
+    <>
+      <Container>
+        {isLoading ? (
+          <Oval
+            color="#f03f3b"
+            secondaryColor="transparent"
+            wrapperStyle={wrapperStyle}
+          />
+        ) : (
+          <>
+            <CatalogListStyled>
+              {newCatalog.map((babysitter, index) => (
+                <CatalogItem key={index} babysitter={babysitter} />
+              ))}
+            </CatalogListStyled>
+            {hasFetched && newCatalog.length === 0 && <NotFounds />}
+            {hasFetched &&
+              catalogLength > newCatalog.length &&
+              newCatalog.length > 0 && (
+                <CatalogListBtn onClick={handleNextPage}>
+                  Load more
+                </CatalogListBtn>
+              )}
+          </>
+        )}
+      </Container>
+      <ToastComponent />
+    </>
   );
 };

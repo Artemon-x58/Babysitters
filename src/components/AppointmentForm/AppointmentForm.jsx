@@ -24,10 +24,16 @@ import {
 } from "../FormComponent/FormComponent.styled";
 import { TimePicker } from "../Timepicker/Timepicker";
 import { appointmentSchema } from "../../js/validationSchema";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 export const AppointmentForm = ({ avatar, name, onClose }) => {
+  const notify = () => {
+    toast.success("The form has been successfully submitted");
+  };
+
   const handleOnSubmit = (values, { resetForm }) => {
-    console.log(values);
+    notify();
     resetForm();
     onClose();
   };
