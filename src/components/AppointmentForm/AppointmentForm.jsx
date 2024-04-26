@@ -13,16 +13,25 @@ import {
   AppointmentFormWrapperGrid,
   FormInputAppointment,
   AppointmentFormInputsWrapper,
+  AppointmentFormErrorWrapper,
+  AppointmentFormCustomErrorMessage,
 } from "./AppointmentForm.styled";
-import { Formik } from "formik";
+import { ErrorMessage, Field, Formik } from "formik";
 import Icons from "../../img/icons.svg";
 import {
   FormStyled,
   FormSvgCross,
 } from "../FormComponent/FormComponent.styled";
 import { TimePicker } from "../Timepicker/Timepicker";
+import { appointmentSchema } from "../../js/validationSchema";
 
 export const AppointmentForm = ({ avatar, name, onClose }) => {
+  const handleOnSubmit = (values, { resetForm }) => {
+    console.log(values);
+    resetForm();
+    onClose();
+  };
+
   return (
     <AppointmentFormWrapper>
       <FormSvgCross onClick={onClose}>
@@ -53,45 +62,91 @@ export const AppointmentForm = ({ avatar, name, onClose }) => {
           parent: "",
           comment: "",
         }}
+        validationSchema={appointmentSchema}
+        onSubmit={handleOnSubmit}
       >
         <FormStyled>
           <AppointmentFormWrapperGrid>
-            <FormInputAppointment
-              id="address"
-              name="address"
-              placeholder="Address"
-            />
-            <FormInputAppointment
-              id="number"
-              name="number"
-              placeholder="+380"
-            />
-            <FormInputAppointment
-              id="age"
-              name="age"
-              placeholder="Child's age"
-            />
-            <TimePicker />
-            {/* <FormInputAppointment
-              type="time"
-              id="time"
-              name="time"
-              placeholder="Time"
-            /> */}
+            <AppointmentFormErrorWrapper>
+              <FormInputAppointment
+                id="address"
+                name="address"
+                placeholder="Address"
+              />
+              <ErrorMessage
+                name="address"
+                component={AppointmentFormCustomErrorMessage}
+              />
+            </AppointmentFormErrorWrapper>
+            <AppointmentFormErrorWrapper>
+              <FormInputAppointment
+                id="number"
+                name="number"
+                placeholder="+380"
+              />
+              <ErrorMessage
+                name="number"
+                component={AppointmentFormCustomErrorMessage}
+              />
+            </AppointmentFormErrorWrapper>
+            <AppointmentFormErrorWrapper>
+              <FormInputAppointment
+                id="age"
+                name="age"
+                placeholder="Child's age"
+              />
+              <ErrorMessage
+                name="age"
+                component={AppointmentFormCustomErrorMessage}
+              />
+            </AppointmentFormErrorWrapper>
+            <AppointmentFormErrorWrapper>
+              <Field name="time">
+                {({ field, form }) => (
+                  <TimePicker
+                    value={field.value}
+                    onChange={(option) => {
+                      form.setFieldValue(field.name, option.value);
+                    }}
+                  />
+                )}
+              </Field>
+            </AppointmentFormErrorWrapper>
           </AppointmentFormWrapperGrid>
           <AppointmentFormInputsWrapper>
-            <FormInputAppointment id="email" name="email" placeholder="Email" />
-            <FormInputAppointment
-              id="parent"
-              name="parent"
-              placeholder="Father's or mother's name"
-            />
-            <FormInputAppointment
-              as="textarea"
-              id="comment"
-              name="comment"
-              placeholder="Comment"
-            />
+            <AppointmentFormErrorWrapper>
+              <FormInputAppointment
+                id="email"
+                name="email"
+                placeholder="Email"
+              />
+              <ErrorMessage
+                name="email"
+                component={AppointmentFormCustomErrorMessage}
+              />
+            </AppointmentFormErrorWrapper>
+            <AppointmentFormErrorWrapper>
+              <FormInputAppointment
+                id="parent"
+                name="parent"
+                placeholder="Father's or mother's name"
+              />
+              <ErrorMessage
+                name="parent"
+                component={AppointmentFormCustomErrorMessage}
+              />
+            </AppointmentFormErrorWrapper>
+            <Field name="comment">
+              {({ field }) => (
+                <FormInputAppointment
+                  as="textarea"
+                  id="comment"
+                  name="comment"
+                  placeholder="Comment"
+                  {...field}
+                />
+              )}
+            </Field>
           </AppointmentFormInputsWrapper>
 
           <AppointmentFormBtn type="submit">Send</AppointmentFormBtn>

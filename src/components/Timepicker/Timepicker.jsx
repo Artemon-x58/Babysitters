@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import Select, { components } from "react-select";
 import {
   TimePickerText,
@@ -22,7 +23,7 @@ for (let i = 0; i < totalIntervals; i++) {
 const customStyles = {
   control: (provided) => ({
     ...provided,
-    padding: "16px 18px",
+    padding: "8px 8px",
     borderRadius: "12px",
     borderColor: "rgba(17, 16, 28, 0.1)",
     backgroundColor: "#fbfbfb;",
@@ -97,9 +98,10 @@ const CustomDropdownIndicator = (props) => {
   );
 };
 
-export const TimePicker = () => {
+export const TimePicker = ({ onChange }) => {
   return (
     <Select
+      onChange={onChange}
       options={options}
       styles={customStyles}
       defaultValue={options[0]}
@@ -109,4 +111,8 @@ export const TimePicker = () => {
       }}
     />
   );
+};
+
+TimePicker.propTypes = {
+  onChange: PropTypes.func.isRequired,
 };

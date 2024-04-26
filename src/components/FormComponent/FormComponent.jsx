@@ -17,7 +17,7 @@ import PropTypes from "prop-types";
 import {
   signInValidationSchema,
   signUpValidationSchema,
-} from "./validationSchema";
+} from "../../js/validationSchema";
 import { register, signIn } from "../../redux/auth/authOperations";
 
 export const FormComponent = ({ onClose, isLogInOrReg }) => {

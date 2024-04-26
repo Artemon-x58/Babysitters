@@ -76,7 +76,7 @@ export const AppointmentFormInputsWrapper = styled.div`
   gap: 16px;
   margin-bottom: 40px;
 
-  & :last-child {
+  & textarea {
     height: 116px;
   }
 `;
@@ -103,7 +103,7 @@ export const FormInputAppointment = styled(Field)`
 
 export const AppointmentFormBtn = styled.button`
   border-radius: 30px;
-  padding: 16px 217px;
+  padding: 16px;
   width: 100%;
   height: 52px;
   background: #f03f3b;
@@ -119,4 +119,18 @@ export const AppointmentFormBtn = styled.button`
     background-color: #fbfbfb;
     color: #f03f3b;
   }
+`;
+
+export const AppointmentFormErrorWrapper = styled.div`
+  /* position: relative; */
+  /* width: 100%; */
+  /* display: flex; */
+  /* flex-wrap: wrap; */
+`;
+
+export const AppointmentFormCustomErrorMessage = styled.p`
+  font-size: 16px;
+  line-height: 125%;
+  letter-spacing: -0.01em;
+  color: red;
 `;
