@@ -2,13 +2,14 @@ import { Field, Form } from "formik";
 import styled from "styled-components";
 
 export const FormWrapper = styled.div`
-  padding: 64px;
   position: absolute;
   top: 50%;
   left: 50%;
+  padding: 64px;
   transform: translate(-50%, -50%);
+  height: auto;
   border-radius: 30px;
-  max-width: 438px;
+  width: 40%;
   background: #fbfbfb;
 `;
 
@@ -68,6 +69,17 @@ export const FormInput = styled(Field)`
     line-height: 125%;
     color: #11101c;
   }
+`;
+
+export const FormPasswordSvg = styled.svg`
+  position: absolute;
+  right: 16px;
+  top: 16px;
+
+  width: 20px;
+  height: 20px;
+  fill: transparent;
+  stroke: #11101c;
 `;
 
 export const FormBtn = styled.button`

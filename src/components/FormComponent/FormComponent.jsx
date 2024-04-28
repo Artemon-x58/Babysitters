@@ -5,6 +5,7 @@ import {
   ErrorWrapper,
   FormBtn,
   FormInput,
+  FormPasswordSvg,
   FormStyled,
   FormSubtitle,
   FormSvgCross,
@@ -19,8 +20,19 @@ import {
   signUpValidationSchema,
 } from "../../js/validationSchema";
 import { register, signIn } from "../../redux/auth/authOperations";
+import { useState } from "react";
 
 export const FormComponent = ({ onClose, isLogInOrReg }) => {
+  const [passwordIsVisible, setPasswordIsVisible] = useState("eye-off");
+
+  const handlePasswordVisible = () => {
+    if (passwordIsVisible === "eye") {
+      setPasswordIsVisible("eye-off");
+    } else {
+      setPasswordIsVisible("eye");
+    }
+  };
+
   const dispatch = useDispatch();
   const handleOnSubmit = (values, { resetForm }) => {
     if (isLogInOrReg === "logIn") {
@@ -67,8 +79,13 @@ export const FormComponent = ({ onClose, isLogInOrReg }) => {
               <ErrorMessage name="email" component={CustomErrorMessage} />
             </ErrorWrapper>
             <ErrorWrapper>
+              <label name="password">
+                <FormPasswordSvg onClick={handlePasswordVisible}>
+                  <use href={`${Icons}#icon-${passwordIsVisible}`} />
+                </FormPasswordSvg>
+              </label>
               <FormInput
-                type="password"
+                type={passwordIsVisible === "eye-off" ? "password" : "text"}
                 id="password"
                 name="password"
                 placeholder="Password"
