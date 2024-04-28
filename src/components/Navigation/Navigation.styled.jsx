@@ -1,17 +1,11 @@
 import styled from "styled-components";
-import { Container } from "../Container/Container";
 import { NavLink } from "react-router-dom";
-
-export const NavContainer = styled(Container)`
-  padding: 0 96px;
-  position: relative;
-`;
 
 export const NavStyled = styled.nav`
   position: ${({ $currentPath }) =>
     $currentPath === "/" ? "absolute" : "unset"};
-  right: 96px;
-  left: 96px;
+  right: 128px;
+  left: 128px;
   margin-bottom: 64px;
   display: flex;
   align-items: center;
@@ -33,7 +27,8 @@ export const Logo = styled(NavLink)`
 export const NavListPages = styled.ul`
   display: flex;
   gap: 40px;
-  margin-right: 92px;
+  margin-right: ${({ $currentPath }) =>
+    $currentPath === "/" ? "7.37%" : "18.33%"};
 `;
 
 export const NavListPagesItem = styled.li``;

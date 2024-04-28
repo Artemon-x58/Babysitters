@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 export const ContainerHero = styled(Container)`
   position: relative;
   padding: 0 96px;
+  max-width: 1372px;
   margin-top: 32px;
   margin-bottom: 32px;
 

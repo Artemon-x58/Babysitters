@@ -4,7 +4,6 @@ import {
   NavBtnLogIn,
   NavBtnLogOut,
   NavBtnReg,
-  NavContainer,
   NavListBtns,
   NavListBtnsItem,
   NavListPages,
@@ -25,6 +24,7 @@ import Icons from "../../img/icons.svg";
 import { logOut } from "../../redux/auth/authOperations";
 import { useAuth } from "../../hooks/useAuth";
 import { selectUser } from "../../redux/auth/authSelectors";
+import { Container } from "../Container/Container";
 
 export const Navigation = () => {
   const [currentPath, setCurrentPath] = useState("");
@@ -58,11 +58,11 @@ export const Navigation = () => {
 
   return (
     <>
-      <NavContainer>
+      <Container>
         <NavStyled $currentPath={currentPath}>
           <Logo to="/">Nanny.Services</Logo>
 
-          <NavListPages>
+          <NavListPages $currentPath={currentPath}>
             <NavListPagesItem>
               <NavListPagesLink to="/">Home</NavListPagesLink>
             </NavListPagesItem>
@@ -108,7 +108,7 @@ export const Navigation = () => {
             </NavListBtns>
           )}
         </NavStyled>
-      </NavContainer>
+      </Container>
       <Modal open={isOpenModal} onClose={handleCloseModal}>
         <div>
           <FormComponent

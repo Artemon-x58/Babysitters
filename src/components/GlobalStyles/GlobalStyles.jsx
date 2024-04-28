@@ -9,6 +9,9 @@ export const GlobalStyles = createGlobalStyle`
   box-sizing: border-box;
 }
 
+html {
+  scrollbar-gutter: stable;
+}
   body {
     font-family: "Helvetica Neue", sans-serif;
     font-weight: 500;
