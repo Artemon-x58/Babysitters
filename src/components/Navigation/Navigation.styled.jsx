@@ -28,7 +28,7 @@ export const NavListPages = styled.ul`
   display: flex;
   gap: 40px;
   margin-right: ${({ $currentPath }) =>
-    $currentPath === "/" ? "7.37%" : "18.33%"};
+    $currentPath === "/" ? "6.57%" : "18.33%"};
 `;
 
 export const NavListPagesItem = styled.li``;

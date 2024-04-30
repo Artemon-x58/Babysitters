@@ -1,5 +1,5 @@
 import { ErrorMessage, Formik } from "formik";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   CustomErrorMessage,
   ErrorWrapper,
@@ -21,9 +21,19 @@ import {
 } from "../../js/validationSchema";
 import { register, signIn } from "../../redux/auth/authOperations";
 import { useState } from "react";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 export const FormComponent = ({ onClose, isLogInOrReg }) => {
   const [passwordIsVisible, setPasswordIsVisible] = useState("eye-off");
+
+  const dispatch = useDispatch();
+
+  const notify = () => {
+    toast.error(
+      "Email already in use. Please use a different email or log in."
+    );
+  };
 
   const handlePasswordVisible = () => {
     if (passwordIsVisible === "eye") {
@@ -33,11 +43,11 @@ export const FormComponent = ({ onClose, isLogInOrReg }) => {
     }
   };
 
-  const dispatch = useDispatch();
   const handleOnSubmit = (values, { resetForm }) => {
     if (isLogInOrReg === "logIn") {
       dispatch(signIn(values));
     } else {
+      notify();
       dispatch(register(values));
     }
 

@@ -23,14 +23,17 @@ import { useDispatch, useSelector } from "react-redux";
 import Icons from "../../img/icons.svg";
 import { logOut } from "../../redux/auth/authOperations";
 import { useAuth } from "../../hooks/useAuth";
-import { selectUser } from "../../redux/auth/authSelectors";
+import { selectIsError, selectUser } from "../../redux/auth/authSelectors";
 import { Container } from "../Container/Container";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastComponent } from "../ToastComponent/ToastComponent";
 
 export const Navigation = () => {
   const [currentPath, setCurrentPath] = useState("");
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [isLogInOrReg, setIsLogInOrReg] = useState("logIn");
 
+  const errorMessage = useSelector(selectIsError);
   const location = useLocation();
   const { isLoggedIn } = useAuth();
   const dispatch = useDispatch();
@@ -61,7 +64,6 @@ export const Navigation = () => {
       <Container>
         <NavStyled $currentPath={currentPath}>
           <Logo to="/">Nanny.Services</Logo>
-
           <NavListPages $currentPath={currentPath}>
             <NavListPagesItem>
               <NavListPagesLink to="/">Home</NavListPagesLink>
@@ -117,6 +119,7 @@ export const Navigation = () => {
           />
         </div>
       </Modal>
+      {errorMessage && <ToastComponent />}
     </>
   );
 };
