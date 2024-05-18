@@ -80,6 +80,7 @@ export const CatalogItemPropertiesBetweenSpan = styled.span`
 `;
 
 export const CatalogItemPriceSpan = styled.span`
+  margin-left: 5px;
   color: #38cd3e;
 `;
 

@@ -10,7 +10,7 @@ export const AppointmentFormWrapper = styled.div`
 
   width: 40%;
   border-radius: 30px;
-  height: auto;
+  height: 100vh;
   overflow-y: auto;
   background: #fbfbfb;
 `;
